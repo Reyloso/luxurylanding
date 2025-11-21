@@ -212,19 +212,19 @@ export default function Home() {
             alt="Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-white/70" />
+          <div className="absolute inset-0 bg-black/60" />
         </div>
 
         <div className="container py-12 md:py-20 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="space-y-6">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white">
                 Experience<br />
                 The Magic Of<br />
-                <span className="text-primary">Flight!</span>
+                <span className="text-amber-400">Flight!</span>
               </h1>
-              <p className="text-lg text-muted-foreground max-w-md">
+              <p className="text-lg text-white/80 max-w-md">
                 Descubre el mundo con LuxuryAir. Vuelos premium, servicio excepcional, 
                 destinos inolvidables.
               </p>
