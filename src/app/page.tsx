@@ -7,13 +7,14 @@ import { Badge } from "@/components/ui/badge"
 import { Search, TrendingUp, ArrowRight } from "lucide-react"
 import { FlightTicket } from "@/components/flight-ticket"
 import { FlightDetailModal } from "@/components/flight-detail-modal"
+import { PilotCard } from "@/components/pilot-card"
 import { useState } from "react"
 
 export default function Home() {
   const [selectedFlight, setSelectedFlight] = useState<any>(null)
   const [modalOpen, setModalOpen] = useState(false)
 
-  const flights = [
+  const currentFlights = [
     {
       origin: "CGK",
       destination: "ICN",
@@ -66,31 +67,6 @@ export default function Home() {
       trackingUrl: "https://example.com/track/HK536"
     },
     {
-      origin: "CTU",
-      destination: "SBO",
-      departureTime: "12:28 PM",
-      arrivalTime: "23:58 PM",
-      duration: "11h 30m",
-      date: "27 Apr, 2024",
-      flightNumber: "GI 502",
-      status: "En Vuelo" as const,
-      iconColor: "orange" as const,
-      aircraft: "Airbus A350-900",
-      registration: "F-HXYZ",
-      speed: "590 mph",
-      altitude: "A359",
-      pilot: "Michael Chen",
-      passengers: 298,
-      fuel: "52,000 lbs",
-      weight: "4.2 Kgs",
-      simulator: "MSFS 2024",
-      gate: "C5",
-      terminal: "CA89",
-      seat: "8A",
-      class: "First",
-      trackingUrl: "https://example.com/track/GI502"
-    },
-    {
       origin: "MAD",
       destination: "JFK",
       departureTime: "14:20 PM",
@@ -115,6 +91,34 @@ export default function Home() {
       seat: "12B",
       class: "Premium Economy",
       trackingUrl: "https://example.com/track/LA789"
+    }
+  ]
+
+  const recentFlights = [
+    {
+      origin: "CTU",
+      destination: "SBO",
+      departureTime: "12:28 PM",
+      arrivalTime: "23:58 PM",
+      duration: "11h 30m",
+      date: "26 Apr, 2024",
+      flightNumber: "GI 502",
+      status: "Completado" as const,
+      iconColor: "orange" as const,
+      aircraft: "Airbus A350-900",
+      registration: "F-HXYZ",
+      speed: "590 mph",
+      altitude: "A359",
+      pilot: "Michael Chen",
+      passengers: 298,
+      fuel: "52,000 lbs",
+      weight: "4.2 Kgs",
+      simulator: "MSFS 2024",
+      gate: "C5",
+      terminal: "CA89",
+      seat: "8A",
+      class: "First",
+      trackingUrl: "https://example.com/track/GI502"
     },
     {
       origin: "LHR",
@@ -122,7 +126,7 @@ export default function Home() {
       departureTime: "10:15 AM",
       arrivalTime: "23:00 PM",
       duration: "12h 45m",
-      date: "27 Apr, 2024",
+      date: "26 Apr, 2024",
       flightNumber: "BA 325",
       status: "Completado" as const,
       iconColor: "pink" as const,
@@ -141,6 +145,54 @@ export default function Home() {
       seat: "3F",
       class: "First",
       trackingUrl: "https://example.com/track/BA325"
+    }
+  ]
+
+  const topPilots = [
+    {
+      name: "Perry Jackson",
+      callsign: "PJ452",
+      totalFlights: 247,
+      totalHours: "1,832h",
+      rank: "Captain",
+      recentFlight: "CGK → ICN",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Perry"
+    },
+    {
+      name: "Sarah Mitchell",
+      callsign: "SM536",
+      totalFlights: 189,
+      totalHours: "1,456h",
+      rank: "Captain",
+      recentFlight: "SFO → HNL",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
+    },
+    {
+      name: "Michael Chen",
+      callsign: "MC502",
+      totalFlights: 312,
+      totalHours: "2,145h",
+      rank: "Senior Captain",
+      recentFlight: "CTU → SBO",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael"
+    },
+    {
+      name: "Carlos Rodriguez",
+      callsign: "CR789",
+      totalFlights: 198,
+      totalHours: "1,567h",
+      rank: "Captain",
+      recentFlight: "MAD → JFK",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos"
+    },
+    {
+      name: "James Wilson",
+      callsign: "JW325",
+      totalFlights: 275,
+      totalHours: "1,989h",
+      rank: "Senior Captain",
+      recentFlight: "LHR → SYD",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=James"
     }
   ]
 
@@ -176,51 +228,105 @@ export default function Home() {
                 Descubre el mundo con LuxuryAir. Vuelos premium, servicio excepcional, 
                 destinos inolvidables.
               </p>
-              <Button size="lg" className="rounded-full">
-                Book Now
-                <Search className="ml-2 h-4 w-4" />
-              </Button>
+      
             </div>
 
             {/* Logo Image */}
-            <div className="flex items-center justify-center">
-              <img
-                src="/logo1.png"
-                alt="LuxuryAir Logo"
-                className="w-full max-w-md h-auto rounded-3xl shadow-2xl"
-              />
-            </div>
+            
           </div>
         </div>
       </section>
 
-      {/* Today's Flights Section */}
+      {/* Flights Section */}
       <section className="py-16 md:py-24 bg-muted/30">
         <div className="container">
-          <div className="flex items-center justify-between mb-8">
+          <div className="grid lg:grid-cols-3 gap-6">
+            {/* Current Flights Column */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">Today's Flight</h2>
-              <p className="text-muted-foreground">Vuelos activos en tiempo real</p>
-            </div>
-            <Badge variant="secondary" className="text-sm">5 Flights</Badge>
-          </div>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-xl md:text-2xl font-bold mb-1">Vuelos Actuales</h2>
+                  <p className="text-xs text-muted-foreground">En tiempo real</p>
+                </div>
+                <Badge variant="secondary" className="text-xs">{currentFlights.length}</Badge>
+              </div>
 
-          <div className="flex flex-col gap-4 max-w-2xl mx-auto">
-            {flights.map((flight, index) => (
-              <FlightTicket
-                key={index}
-                origin={flight.origin}
-                destination={flight.destination}
-                departureTime={flight.departureTime}
-                arrivalTime={flight.arrivalTime}
-                duration={flight.duration}
-                date={flight.date}
-                flightNumber={flight.flightNumber}
-                status={flight.status}
-                iconColor={flight.iconColor}
-                onClick={() => handleFlightClick(flight)}
-              />
-            ))}
+              <div className="flex flex-col gap-3">
+                {currentFlights.map((flight, index) => (
+                  <FlightTicket
+                    key={index}
+                    origin={flight.origin}
+                    destination={flight.destination}
+                    departureTime={flight.departureTime}
+                    arrivalTime={flight.arrivalTime}
+                    duration={flight.duration}
+                    date={flight.date}
+                    flightNumber={flight.flightNumber}
+                    pilot={flight.pilot}
+                    status={flight.status}
+                    iconColor={flight.iconColor}
+                    onClick={() => handleFlightClick(flight)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Recent Flights Column */}
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-xl md:text-2xl font-bold mb-1">Vuelos Recientes</h2>
+                  <p className="text-xs text-muted-foreground">Completados</p>
+                </div>
+                <Badge variant="secondary" className="text-xs">{recentFlights.length}</Badge>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                {recentFlights.map((flight, index) => (
+                  <FlightTicket
+                    key={index}
+                    origin={flight.origin}
+                    destination={flight.destination}
+                    departureTime={flight.departureTime}
+                    arrivalTime={flight.arrivalTime}
+                    duration={flight.duration}
+                    date={flight.date}
+                    flightNumber={flight.flightNumber}
+                    pilot={flight.pilot}
+                    status={flight.status}
+                    iconColor={flight.iconColor}
+                    onClick={() => handleFlightClick(flight)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Top Pilots Column */}
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-xl md:text-2xl font-bold mb-1">Pilotos Destacados</h2>
+                  <p className="text-xs text-muted-foreground">Vuelos recientes</p>
+                </div>
+                <Badge variant="secondary" className="text-xs">{topPilots.length}</Badge>
+              </div>
+
+              <div className="flex flex-col gap-3 max-h-[900px] overflow-y-auto pr-2 scrollbar-thin">
+                {topPilots.map((pilot, index) => (
+                  <PilotCard
+                    key={index}
+                    name={pilot.name}
+                    callsign={pilot.callsign}
+                    totalFlights={pilot.totalFlights}
+                    totalHours={pilot.totalHours}
+                    rank={pilot.rank}
+                    recentFlight={pilot.recentFlight}
+                    avatar={pilot.avatar}
+                    referenceId={`2030${1839 + index}`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
           {selectedFlight && (
