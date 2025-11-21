@@ -237,6 +237,45 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Stats Section */}
+      <section className="py-20">
+        <div className="container">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { value: "500+", label: "Pilotos Activos" },
+              { value: "15K+", label: "Vuelos Completados" },
+              { value: "50+", label: "Destinos" },
+              { value: "86+", label: "Rutas Disponibles" }
+            ].map((stat, index) => (
+              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                <CardContent className="pt-6 pb-6">
+                  <div className="text-4xl font-bold text-primary mb-2">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Live Tracking Section */}
+      <section className="py-16 md:py-24">
+        <div className="container">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Live Tracking</h2>
+            <p className="text-muted-foreground">Sigue nuestros vuelos en tiempo real</p>
+          </div>
+          <div className="w-full h-[600px] rounded-lg overflow-hidden border border-border shadow-lg">
+            <iframe
+              src="https://newsky.app/airline/public/map?style=light&token=LXY_dDkkE8VPZAvJN4x2ouvaaBxujjCiMX"
+              className="w-full h-full"
+              title="Live Flight Tracking"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Flights Section */}
       <section className="py-16 md:py-24 bg-muted/30">
         <div className="container">
@@ -336,66 +375,6 @@ export default function Home() {
               flightData={selectedFlight}
             />
           )}
-        </div>
-      </section>
-
-      {/* Promo Section */}
-      <section className="py-16 bg-gradient-to-br from-red-50 to-pink-50">
-        <div className="container">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&auto=format&fit=crop&q=80"
-                alt="Travel"
-                className="rounded-3xl shadow-2xl"
-              />
-            </div>
-            <div className="space-y-6">
-              <Badge variant="secondary" className="bg-red-100 text-red-700 hover:bg-red-200">
-                Oferta Especial
-              </Badge>
-              <h2 className="text-4xl md:text-5xl font-bold">
-                UNLEASH<br />
-                WANDERLUST WITH<br />
-                <span className="text-primary">LUXURY AIR</span>
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Descubre el mundo con estilo. Vuelos premium a destinos increíbles 
-                con el mejor servicio de la red IVAO.
-              </p>
-              <div className="flex flex-wrap gap-4 items-center">
-                <div className="bg-white px-6 py-3 rounded-full shadow-lg">
-                  <span className="text-3xl font-bold text-primary">20% OFF</span>
-                  <span className="text-sm text-muted-foreground ml-2">En tu primer vuelo</span>
-                </div>
-                <Button size="lg" className="rounded-full">
-                  Book A Flight Now
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20">
-        <div className="container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { value: "500+", label: "Pilotos Activos" },
-              { value: "15K+", label: "Vuelos Completados" },
-              { value: "50+", label: "Destinos" },
-              { value: "86+", label: "Rutas Disponibles" }
-            ].map((stat, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardContent className="pt-6 pb-6">
-                  <div className="text-4xl font-bold text-primary mb-2">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
         </div>
       </section>
 
