@@ -247,10 +247,10 @@ export default function Home() {
               { value: "50+", label: "Destinos" },
               { value: "86+", label: "Rutas Disponibles" }
             ].map((stat, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+              <Card key={index} className="text-center hover:shadow-lg transition-shadow bg-[#161616] text-white border-gray-800">
                 <CardContent className="pt-6 pb-6">
-                  <div className="text-4xl font-bold text-primary mb-2">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div className="text-4xl font-bold text-amber-400 mb-2">{stat.value}</div>
+                  <div className="text-sm text-white/60">{stat.label}</div>
                 </CardContent>
               </Card>
             ))}
@@ -379,20 +379,20 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-primary/10 to-primary/5">
+      <section className="py-20 md:py-28">
         <div className="container">
-          <Card className="bg-primary text-primary-foreground border-0 shadow-2xl">
+          <Card className="bg-[#161616] text-white border-gray-800 shadow-2xl">
             <CardContent className="p-12 text-center space-y-6">
-              <TrendingUp className="h-16 w-16 mx-auto opacity-80" />
-              <h2 className="text-3xl md:text-4xl font-bold">
+              <TrendingUp className="h-16 w-16 mx-auto text-amber-400" />
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
                 ¿Listo para despegar?
               </h2>
-              <p className="text-lg opacity-90 max-w-2xl mx-auto">
+              <p className="text-lg text-white/80 max-w-2xl mx-auto">
                 Únete a la comunidad de pilotos virtuales más exclusiva. 
                 Regístrate hoy y comienza tu carrera en LuxuryAir.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Button size="lg" variant="secondary" className="rounded-full" asChild>
+                <Button size="lg" variant="secondary" className="rounded-full bg-amber-600 hover:bg-amber-700 text-white" asChild>
                   <Link href="/registro">
                     Registrarse Ahora
                     <ArrowRight className="ml-2 h-4 w-4" />

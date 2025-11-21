@@ -46,9 +46,9 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto p-0 scrollbar-thin bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white border-slate-700">
+      <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto p-0 scrollbar-thin bg-gradient-to-br from-amber-900 via-amber-800 to-amber-950 text-white border-amber-950/50">
         {/* Header con información de aeropuertos */}
-        <div className="bg-gradient-to-br from-slate-950 to-slate-900 text-white p-6 rounded-t-lg">
+        <div className="bg-gradient-to-br from-amber-950 via-amber-900 to-black text-white p-6 rounded-t-lg">
           <div className="flex items-center justify-between mb-4">
             <div>
               <div className="text-sm opacity-70">Dubai</div>
@@ -67,7 +67,7 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
 
         {/* Información del avión */}
         <div className="p-6">
-          <div className="bg-slate-800/50 rounded-lg p-4 mb-4 border border-white/10">
+          <div className="bg-amber-950/30 rounded-lg p-4 mb-4 border border-black/30">
             <div className="flex items-center justify-between mb-3">
               <h3 className="font-bold text-lg text-white">{flightData.aircraft}</h3>
               <button className="text-white/40 hover:text-white/60">
@@ -78,7 +78,7 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
             </div>
 
             {/* Imagen del avión */}
-            <div className="bg-slate-900/50 rounded-lg p-4 mb-4 flex items-center justify-center border border-white/5">
+            <div className="bg-black/30 rounded-lg p-4 mb-4 flex items-center justify-center border border-black/40">
               <Image 
                 src="/boeing1.png" 
                 alt="Aircraft" 
@@ -120,7 +120,7 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
             </div>
           </div>
 
-          <Separator className="my-4 bg-white/10" />
+          <Separator className="my-4 bg-black/30" />
 
           {/* Información del piloto y pasajeros */}
           <div className="space-y-3">
@@ -147,7 +147,7 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
             </div>
           </div>
 
-          <Separator className="my-4 bg-white/10" />
+          <Separator className="my-4 bg-black/30" />
 
           {/* Información de vuelo */}
           <div className="grid grid-cols-3 gap-4">
@@ -165,7 +165,7 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
             </div>
           </div>
 
-          <Separator className="my-4 bg-white/10" />
+          <Separator className="my-4 bg-black/30" />
 
           {/* Detalles adicionales */}
           <div className="space-y-3">
@@ -193,7 +193,7 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
           </div>
 
           {/* QR Code */}
-          <div className="mt-6 bg-slate-800/50 rounded-lg p-4 border border-white/10">
+          <div className="mt-6 bg-amber-950/30 rounded-lg p-4 border border-black/30">
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-xs text-white/50 mb-1">Track Flight</div>

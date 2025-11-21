@@ -10,22 +10,22 @@ export default function PilotosPage() {
       <div className="max-w-4xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <Badge variant="secondary">Centro de Pilotos</Badge>
-          <h1 className="text-4xl md:text-5xl font-bold">Portal de Pilotos</h1>
-          <p className="text-xl text-muted-foreground">
+          <Badge variant="secondary" className="bg-amber-900/80 text-white border-amber-950/50">Centro de Pilotos</Badge>
+          <h1 className="text-4xl md:text-5xl font-bold text-white">Portal de Pilotos</h1>
+          <p className="text-xl text-amber-200/90">
             Todo lo que necesitas saber sobre la carrera de piloto en LuxuryAir
           </p>
         </div>
 
         {/* Pilot Ranks */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Sistema de Rangos</CardTitle>
-            <CardDescription>
+        <Card className="bg-[#161616] text-white border-gray-800">
+          <CardHeader className="p-6 pb-4">
+            <CardTitle className="text-white text-xl mb-3">Sistema de Rangos</CardTitle>
+            <CardDescription className="text-white/70 text-base">
               Progresa en tu carrera desde Cadete hasta Capitán Senior
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-6 pb-6">
             <div className="space-y-4">
               <div className="flex items-start gap-4 p-4 border rounded-lg">
                 <Badge variant="secondary">1</Badge>
@@ -68,13 +68,13 @@ export default function PilotosPage() {
 
         {/* Training Programs */}
         <div>
-          <h2 className="text-3xl font-bold mb-8 text-center">Programas de Formación</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center text-white">Programas de Formación</h2>
           <div className="grid md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <GraduationCap className="h-10 w-10 mb-2 text-primary" />
-                <CardTitle>Academia de Vuelo</CardTitle>
-                <CardDescription>
+            <Card className="bg-[#161616] text-white border-gray-800">
+              <CardHeader className="p-6">
+                <GraduationCap className="h-10 w-10 mb-3 text-amber-200" />
+                <CardTitle className="text-white text-xl mb-3">Academia de Vuelo</CardTitle>
+                <CardDescription className="text-white/70 text-base leading-relaxed">
                   Programas completos de entrenamiento para nuevos pilotos:
                   <ul className="list-disc list-inside mt-4 space-y-1">
                     <li>Introducción a la aviación virtual</li>
@@ -86,11 +86,11 @@ export default function PilotosPage() {
               </CardHeader>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <Trophy className="h-10 w-10 mb-2 text-primary" />
-                <CardTitle>Type Ratings</CardTitle>
-                <CardDescription>
+            <Card className="bg-[#161616] text-white border-gray-800">
+              <CardHeader className="p-6">
+                <Trophy className="h-10 w-10 mb-3 text-amber-200" />
+                <CardTitle className="text-white text-xl mb-3">Type Ratings</CardTitle>
+                <CardDescription className="text-white/70 text-base leading-relaxed">
                   Certificaciones por tipo de aeronave:
                   <ul className="list-disc list-inside mt-4 space-y-1">
                     <li>Boeing 737 NG/MAX</li>
@@ -102,11 +102,11 @@ export default function PilotosPage() {
               </CardHeader>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <BookOpen className="h-10 w-10 mb-2 text-primary" />
-                <CardTitle>Cursos Avanzados</CardTitle>
-                <CardDescription>
+            <Card className="bg-[#161616] text-white border-gray-800">
+              <CardHeader className="p-6">
+                <BookOpen className="h-10 w-10 mb-3 text-amber-200" />
+                <CardTitle className="text-white text-xl mb-3">Cursos Avanzados</CardTitle>
+                <CardDescription className="text-white/70 text-base leading-relaxed">
                   Especialización profesional:
                   <ul className="list-disc list-inside mt-4 space-y-1">
                     <li>Operaciones ETOPS</li>
@@ -118,11 +118,11 @@ export default function PilotosPage() {
               </CardHeader>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <Users2 className="h-10 w-10 mb-2 text-primary" />
-                <CardTitle>Programa Instructor</CardTitle>
-                <CardDescription>
+            <Card className="bg-[#161616] text-white border-gray-800">
+              <CardHeader className="p-6">
+                <Users2 className="h-10 w-10 mb-3 text-amber-200" />
+                <CardTitle className="text-white text-xl mb-3">Programa Instructor</CardTitle>
+                <CardDescription className="text-white/70 text-base leading-relaxed">
                   Conviértete en instructor:
                   <ul className="list-disc list-inside mt-4 space-y-1">
                     <li>Técnicas de enseñanza</li>
@@ -137,11 +137,11 @@ export default function PilotosPage() {
         </div>
 
         {/* Pilot Resources */}
-        <Card className="bg-gradient-to-br from-primary/10 to-primary/5">
-          <CardHeader>
-            <CardTitle>Recursos para Pilotos</CardTitle>
+        <Card className="bg-[#161616] text-white border-gray-800">
+          <CardHeader className="p-6 pb-4">
+            <CardTitle className="text-white text-xl mb-3">Recursos para Pilotos</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-6 px-6 pb-6">
             <div className="grid md:grid-cols-3 gap-4">
               <div className="flex items-start gap-3">
                 <Clock className="h-5 w-5 text-primary mt-1" />

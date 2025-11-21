@@ -47,7 +47,7 @@ export function FlightTicket({
 }: FlightTicketProps) {
   return (
     <Card 
-      className="overflow-hidden hover:shadow-lg transition-shadow w-full cursor-pointer bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white border-slate-700"
+      className="overflow-hidden hover:shadow-lg transition-shadow w-full cursor-pointer bg-gradient-to-br from-amber-900 via-amber-800 to-amber-950 text-white border-amber-950/50"
       onClick={onClick}
     >
       <CardContent className="p-4 relative">

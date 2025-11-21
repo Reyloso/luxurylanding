@@ -8,19 +8,19 @@ export default function OperacionPage() {
       <div className="max-w-4xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <Badge variant="secondary">Operaciones</Badge>
-          <h1 className="text-4xl md:text-5xl font-bold">Centro de Operaciones</h1>
-          <p className="text-xl text-muted-foreground">
+          <Badge variant="secondary" className="bg-amber-900/80 text-white border-amber-950/50">Operaciones</Badge>
+          <h1 className="text-4xl md:text-5xl font-bold text-white">Centro de Operaciones</h1>
+          <p className="text-xl text-amber-200/90">
             Conoce cómo operamos y los estándares que nos hacen una aerolínea virtual de clase mundial.
           </p>
         </div>
 
         {/* Operations Overview */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Estándares Operacionales</CardTitle>
+        <Card className="bg-[#161616] text-white border-gray-800">
+          <CardHeader className="p-6 pb-4">
+            <CardTitle className="text-white text-xl mb-3">Estándares Operacionales</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 px-6 pb-6 text-white/90">
             <p>
               En LuxuryAir, seguimos procedimientos operacionales estándar (SOP's) basados en 
               las prácticas de aerolíneas reales. Cada vuelo debe cumplir con nuestros 
@@ -69,13 +69,13 @@ export default function OperacionPage() {
 
         {/* Key Procedures */}
         <div>
-          <h2 className="text-3xl font-bold mb-8 text-center">Procedimientos Clave</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center text-white">Procedimientos Clave</h2>
           <div className="grid md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <FileText className="h-10 w-10 mb-2 text-primary" />
-                <CardTitle>Planificación de Vuelo</CardTitle>
-                <CardDescription>
+            <Card className="bg-[#161616] text-white border-gray-800">
+              <CardHeader className="p-6">
+                <FileText className="h-10 w-10 mb-3 text-amber-200" />
+                <CardTitle className="text-white text-xl mb-3">Planificación de Vuelo</CardTitle>
+                <CardDescription className="text-white/70 text-base leading-relaxed">
                   <ul className="list-disc list-inside space-y-2 mt-4">
                     <li>Selección de ruta desde nuestro sistema</li>
                     <li>Cálculo de combustible y peso</li>
@@ -86,11 +86,11 @@ export default function OperacionPage() {
               </CardHeader>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <MapPin className="h-10 w-10 mb-2 text-primary" />
-                <CardTitle>Ejecución del Vuelo</CardTitle>
-                <CardDescription>
+            <Card className="bg-[#161616] text-white border-gray-800">
+              <CardHeader className="p-6">
+                <MapPin className="h-10 w-10 mb-3 text-amber-200" />
+                <CardTitle className="text-white text-xl mb-3">Ejecución del Vuelo</CardTitle>
+                <CardDescription className="text-white/70 text-base leading-relaxed">
                   <ul className="list-disc list-inside space-y-2 mt-4">
                     <li>Pre-vuelo y checks completos</li>
                     <li>Seguimiento de SOP's de la aeronave</li>
@@ -101,11 +101,11 @@ export default function OperacionPage() {
               </CardHeader>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <Radio className="h-10 w-10 mb-2 text-primary" />
-                <CardTitle>Comunicaciones</CardTitle>
-                <CardDescription>
+            <Card className="bg-[#161616] text-white border-gray-800">
+              <CardHeader className="p-6">
+                <Radio className="h-10 w-10 mb-3 text-amber-200" />
+                <CardTitle className="text-white text-xl mb-3">Comunicaciones</CardTitle>
+                <CardDescription className="text-white/70 text-base leading-relaxed">
                   <ul className="list-disc list-inside space-y-2 mt-4">
                     <li>Fraseología ICAO estándar</li>
                     <li>Coordinación con Dispatch</li>
@@ -116,11 +116,11 @@ export default function OperacionPage() {
               </CardHeader>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CheckCircle className="h-10 w-10 mb-2 text-primary" />
-                <CardTitle>Post-Vuelo</CardTitle>
-                <CardDescription>
+            <Card className="bg-[#161616] text-white border-gray-800">
+              <CardHeader className="p-6">
+                <CheckCircle className="h-10 w-10 mb-3 text-amber-200" />
+                <CardTitle className="text-white text-xl mb-3">Post-Vuelo</CardTitle>
+                <CardDescription className="text-white/70 text-base leading-relaxed">
                   <ul className="list-disc list-inside space-y-2 mt-4">
                     <li>Reporte PIREP automático</li>
                     <li>Registro de horas de vuelo</li>
@@ -134,11 +134,11 @@ export default function OperacionPage() {
         </div>
 
         {/* Fleet Requirements */}
-        <Card className="bg-muted">
-          <CardHeader>
-            <CardTitle>Requisitos de Flota</CardTitle>
+        <Card className="bg-[#161616] text-white border-gray-800">
+          <CardHeader className="p-6 pb-4">
+            <CardTitle className="text-white text-xl mb-3">Requisitos de Flota</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 px-6 pb-6 text-white/90">
             <p>
               Para volar con LuxuryAir, debes utilizar aeronaves que cumplan con nuestros 
               estándares de calidad:

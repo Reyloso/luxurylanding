@@ -66,21 +66,21 @@ export default function EventosPage() {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <Badge variant="secondary">Comunidad</Badge>
-          <h1 className="text-4xl md:text-5xl font-bold">Eventos</h1>
-          <p className="text-xl text-muted-foreground">
+          <Badge variant="secondary" className="bg-amber-900/80 text-white border-amber-950/50">Comunidad</Badge>
+          <h1 className="text-4xl md:text-5xl font-bold text-white">Eventos</h1>
+          <p className="text-xl text-amber-200/90">
             Únete a nuestros eventos especiales y vuela junto a la comunidad
           </p>
         </div>
 
         {/* Upcoming Events */}
         <div>
-          <h2 className="text-3xl font-bold mb-6">Próximos Eventos</h2>
+          <h2 className="text-3xl font-bold mb-6 text-white">Próximos Eventos</h2>
           <div className="space-y-6">
             {upcomingEvents.map((event) => (
-              <Card key={event.id} className="overflow-hidden">
+              <Card key={event.id} className="overflow-hidden bg-gradient-to-br from-black via-amber-950/20 to-black text-white border-gray-800">
                 <div className="flex flex-col md:flex-row">
-                  <div className="bg-gradient-to-br from-primary/20 to-primary/5 p-8 flex items-center justify-center md:w-48">
+                  <div className="bg-amber-950/30 p-8 flex items-center justify-center md:w-48">
                     <div className="text-7xl">{event.image}</div>
                   </div>
                   <div className="flex-1">
@@ -94,9 +94,9 @@ export default function EventosPage() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-3">
-                      <div className="grid sm:grid-cols-2 gap-3 text-sm">
+                      <div className="grid sm:grid-cols-2 gap-3 text-sm text-white/90">
                         <div className="flex items-center gap-2">
-                          <Calendar className="h-4 w-4 text-primary" />
+                          <Calendar className="h-4 w-4 text-amber-400" />
                           <span>{new Date(event.date).toLocaleDateString('es-ES', {
                             year: 'numeric',
                             month: 'long',

@@ -48,7 +48,7 @@ export function Navbar() {
           <NavigationMenuList>
             {navItems.map((item) => (
               <NavigationMenuItem key={item.href}>
-                <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-white/90 hover:text-white hover:bg-black/80 data-[active]:bg-black/80 data-[state=open]:bg-black/80")}>
+                <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-white/90 hover:text-white hover:bg-amber-900/80 data-[active]:bg-amber-900/80 data-[state=open]:bg-amber-900/80")}>
                   <Link href={item.href}>
                     {item.label}
                   </Link>
@@ -60,7 +60,7 @@ export function Navbar() {
 
         {/* Desktop Auth Buttons */}
         <div className="hidden lg:flex items-center gap-2">
-          <Button variant="ghost" asChild className="text-white hover:text-white hover:bg-black/80">
+          <Button variant="ghost" asChild className="text-white hover:text-white hover:bg-amber-900/80">
             <Link href="/login">Login</Link>
           </Button>
           <Button asChild className="bg-amber-600 hover:bg-amber-700 text-white">
