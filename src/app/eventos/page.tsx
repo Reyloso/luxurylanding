@@ -8,23 +8,29 @@ const upcomingEvents = [
     id: 1,
     title: "Christmas Fly-In 2025",
     date: "2025-12-24",
-    time: "19:00 UTC",
-    location: "Múltiples destinos europeos → Londres Heathrow",
+    time: "19:00 - 23:00 UTC",
+    location: "ABC Aviation Event Center, 123 Airport Road, Londres, Reino Unido",
     participants: "150+ pilotos",
-    description: "Únete a nuestra celebración navideña con vuelos desde toda Europa convergiendo en Londres. ATC completo garantizado.",
+    description: "Únete a nuestra celebración navideña con vuelos desde toda Europa convergiendo en Londres. ATC completo garantizado. Disfruta de una noche especial volando con la comunidad.",
     status: "Próximo",
-    image: "🎄"
+    image: "/evento1.jpg",
+    price: "$50.00",
+    month: "DEC",
+    day: "24"
   },
   {
     id: 2,
     title: "Transatlantic Challenge",
     date: "2026-01-15",
-    time: "14:00 UTC",
-    location: "Nueva York JFK → Londres Heathrow",
+    time: "14:00 - 20:00 UTC",
+    location: "Virtual Event Center, Nueva York JFK → Londres Heathrow",
     participants: "80 pilotos max",
-    description: "Competencia de vuelo transatlántico. Evaluación de eficiencia de combustible, puntualidad y procedimientos.",
+    description: "Competencia de vuelo transatlántico. Evaluación de eficiencia de combustible, puntualidad y procedimientos. Únete para demostrar tus habilidades en este desafío de largo alcance.",
     status: "Inscripción Abierta",
-    image: "🌊"
+    image: "/evento1.jpg",
+    price: "Gratis",
+    month: "JAN",
+    day: "15"
   },
   {
     id: 3,
@@ -33,9 +39,12 @@ const upcomingEvents = [
     time: "Durante toda la semana",
     location: "Hub en Singapur - Rutas asiáticas",
     participants: "Ilimitado",
-    description: "Semana de eventos volando rutas por Asia. Un vuelo diferente cada día con premios para participantes activos.",
+    description: "Semana de eventos volando rutas por Asia. Un vuelo diferente cada día con premios para participantes activos. Explora los destinos más fascinantes de Asia Oriental.",
     status: "Próximamente",
-    image: "🌏"
+    image: "/evento1.jpg",
+    price: "$75.00",
+    month: "FEB",
+    day: "10"
   }
 ]
 
@@ -75,57 +84,89 @@ export default function EventosPage() {
 
         {/* Upcoming Events */}
         <div>
-          <h2 className="text-3xl font-bold mb-6 text-white">Próximos Eventos</h2>
+          <h2 className="text-3xl font-bold mb-8 text-white">Noviembre 2025</h2>
           <div className="space-y-6">
             {upcomingEvents.map((event) => (
-              <Card key={event.id} className="overflow-hidden bg-gradient-to-br from-black via-amber-950/20 to-black text-white border-gray-800">
+              <div key={event.id} className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
                 <div className="flex flex-col md:flex-row">
-                  <div className="bg-amber-950/30 p-8 flex items-center justify-center md:w-48">
-                    <div className="text-7xl">{event.image}</div>
+                  {/* Date Box */}
+                  <div className="bg-white border-r border-gray-200 p-6 flex flex-col items-center justify-center md:w-32 text-center">
+                    <div className="text-xs uppercase tracking-wide text-gray-600 font-semibold mb-1">
+                      {event.month}
+                    </div>
+                    <div className="text-4xl font-bold text-gray-900">
+                      {event.day}
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <CardHeader>
-                      <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <Badge>{event.status}</Badge>
-                      </div>
-                      <CardTitle className="text-2xl">{event.title}</CardTitle>
-                      <CardDescription className="text-base mt-2">
-                        {event.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <div className="grid sm:grid-cols-2 gap-3 text-sm text-white/90">
-                        <div className="flex items-center gap-2">
-                          <Calendar className="h-4 w-4 text-amber-400" />
-                          <span>{new Date(event.date).toLocaleDateString('es-ES', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                          })}</span>
+
+                  {/* Content */}
+                  <div className="flex-1 p-6">
+                    <div className="flex flex-col lg:flex-row gap-6">
+                      {/* Text Content */}
+                      <div className="flex-1 space-y-3">
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <div className="text-sm text-blue-600 font-medium mb-1">
+                              {event.time}
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2 hover:text-blue-600 cursor-pointer transition-colors">
+                              {event.title}
+                            </h3>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Clock className="h-4 w-4 text-primary" />
-                          <span>{event.time}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <MapPin className="h-4 w-4 text-primary" />
+
+                        <div className="flex items-start gap-2 text-sm text-gray-700">
+                          <MapPin className="h-4 w-4 mt-0.5 text-gray-400 flex-shrink-0" />
                           <span>{event.location}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Users className="h-4 w-4 text-primary" />
-                          <span>{event.participants}</span>
+
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                          {event.description}
+                        </p>
+
+                        <div className="flex items-center gap-4 pt-2">
+                          <Button 
+                            className="bg-gray-900 hover:bg-gray-800 text-white underline"
+                            size="sm"
+                          >
+                            Ver Detalles
+                          </Button>
+                          <span className="text-sm font-semibold text-gray-900">
+                            {event.price}
+                          </span>
                         </div>
                       </div>
-                      {event.status === "Inscripción Abierta" && (
-                        <Button className="mt-4">
-                          Inscribirse Ahora
-                        </Button>
-                      )}
-                    </CardContent>
+
+                      {/* Image */}
+                      <div className="lg:w-64 flex-shrink-0">
+                        <div className="relative w-full h-48 lg:h-full bg-gray-200 rounded-lg overflow-hidden">
+                          {event.image.startsWith('/') ? (
+                            <img 
+                              src={event.image} 
+                              alt={event.title}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100">
+                              <Plane className="w-16 h-16 text-blue-400" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </Card>
+              </div>
             ))}
+          </div>
+        </div>
+
+        {/* December Section */}
+        <div>
+          <h2 className="text-3xl font-bold mb-8 text-white">Diciembre 2025</h2>
+          <div className="bg-white rounded-lg p-8 text-center text-gray-500">
+            <Calendar className="w-12 h-12 mx-auto mb-3 text-gray-400" />
+            <p>No hay eventos programados para este mes</p>
           </div>
         </div>
 

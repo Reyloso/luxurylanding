@@ -29,7 +29,9 @@ export default function LoginPage() {
         {/* Header */}
         <div className="text-center space-y-4">
           <div className="flex justify-center mb-4">
-            <img src="/logo1.png" alt="LuxuryAir" className="h-20 w-auto" />
+            <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
+              <Plane className="h-8 w-8 text-primary" />
+            </div>
           </div>
           <h1 className="text-4xl font-bold">Bienvenido de Vuelta</h1>
           <p className="text-muted-foreground">
@@ -124,11 +126,6 @@ export default function LoginPage() {
         </Card>
 
         {/* IVAO SSO (Future) */}
-        <div className="text-center">
-          <Badge variant="secondary">
-            Próximamente: Login con IVAO SSO
-          </Badge>
-        </div>
       </div>
     </div>
   )

@@ -237,6 +237,40 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Partners Section */}
+      <section className="bg-white py-16">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Nuestros Partners</h2>
+            <p className="text-gray-600 text-lg">Colaboramos con las mejores organizaciones de aviación virtual</p>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-12">
+            <div className=" transition-all duration-300 hover:scale-110">
+              <img 
+                src="/ivao.png" 
+                alt="IVAO" 
+                className="h-20 w-auto object-contain"
+              />
+            </div>
+            <div className=" transition-all duration-300 hover:scale-110">
+              <img 
+                src="/ivaova.webp" 
+                alt="IVAO" 
+                className="h-20 w-auto object-contain"
+              />
+            </div>
+            <div className=" transition-all duration-300 hover:scale-110">
+              <img 
+                src="/ivaoco.webp" 
+                alt="IVAO" 
+                className="h-20 w-auto object-contain"
+              />
+            </div>
+            {/* Añade más logos aquí cuando los tengas */}
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
       <section className="py-20">
         <div className="container">
