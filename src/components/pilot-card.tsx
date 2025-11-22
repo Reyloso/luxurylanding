@@ -38,7 +38,7 @@ export function PilotCard({
 
   return (
     <div 
-      className="relative h-[280px] cursor-pointer"
+      className="relative h-[150px] cursor-pointer"
       style={{ perspective: '1000px' }}
       onClick={() => setIsFlipped(!isFlipped)}
     >
@@ -81,19 +81,19 @@ export function PilotCard({
 
             {/* Right Section - QR Code and Logo */}
             <div className="flex flex-col items-center justify-center pl-1.5 border-l border-white/20 flex-shrink-0">
-              <div className="w-20 h-20 bg-white/90 rounded-lg flex items-center justify-center p-0.5 mb-1">
+              <div className="w-16 h-16 bg-white/90 rounded-lg flex items-center justify-center p-0.5 mb-1">
                 <img 
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(`https://luxuryair.com/pilot/${callsign}`)}`}
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=64x64&data=${encodeURIComponent(`https://luxuryair.com/pilot/${callsign}`)}`}
                   alt="QR Code"
                   className="w-full h-full"
                 />
               </div>
-              <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm">
+              <div className="w-7 h-7 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm">
                 <Image 
                   src="/logo1.png" 
                   alt="Logo" 
-                  width={28}
-                  height={18}
+                  width={24}
+                  height={16}
                   className="object-contain brightness-0 invert"
                 />
               </div>

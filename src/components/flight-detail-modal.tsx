@@ -9,7 +9,7 @@ import { Plane } from "lucide-react"
 interface FlightDetailModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  flightData: {
+  flight?: {
     origin: string
     destination: string
     departureTime: string
@@ -33,10 +33,12 @@ interface FlightDetailModalProps {
     seat: string
     class: string
     trackingUrl: string
-  }
+  } | null
 }
 
-export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDetailModalProps) {
+export function FlightDetailModal({ open, onOpenChange, flight }: FlightDetailModalProps) {
+  if (!flight) return null
+  
   const statusColorClasses = {
     "En Vuelo": "bg-green-500/20 text-green-400 hover:bg-green-500/30 border-green-500/30",
     "Programado": "bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 border-blue-500/30",
@@ -52,15 +54,15 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
           <div className="flex items-center justify-between mb-4">
             <div>
               <div className="text-sm opacity-70">Dubai</div>
-              <div className="text-4xl font-bold">{flightData.origin}</div>
+              <div className="text-4xl font-bold">{flight.origin}</div>
             </div>
             <div className="text-center px-4">
               <Plane className="h-6 w-6 mx-auto mb-1 rotate-90" />
-              <div className="text-xs opacity-90">{flightData.duration}</div>
+              <div className="text-xs opacity-90">{flight.duration}</div>
             </div>
             <div className="text-right">
               <div className="text-sm opacity-90">Lahore</div>
-              <div className="text-4xl font-bold">{flightData.destination}</div>
+              <div className="text-4xl font-bold">{flight.destination}</div>
             </div>
           </div>
         </div>
@@ -69,7 +71,7 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
         <div className="p-6">
           <div className="bg-amber-950/30 rounded-lg p-4 mb-4 border border-black/30">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-bold text-lg text-white">{flightData.aircraft}</h3>
+              <h3 className="font-bold text-lg text-white">{flight.aircraft}</h3>
               <button className="text-white/40 hover:text-white/60">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
@@ -92,11 +94,11 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
             <div className="grid grid-cols-3 gap-3 mb-4">
               <div>
                 <div className="text-xs text-white/50">IATA Type</div>
-                <div className="font-semibold text-white">{flightData.registration}</div>
+                <div className="font-semibold text-white">{flight.registration}</div>
               </div>
               <div>
                 <div className="text-xs text-white/50">ICAO Type</div>
-                <div className="font-semibold text-white">{flightData.aircraft.split(' ')[1]}</div>
+                <div className="font-semibold text-white">{flight.aircraft.split(' ')[1]}</div>
               </div>
               <div>
                 <div className="text-xs text-white/50">Tail No.</div>
@@ -107,11 +109,11 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
             <div className="grid grid-cols-3 gap-3">
               <div>
                 <div className="text-xs text-white/50">Speed</div>
-                <div className="font-semibold text-white">{flightData.speed}</div>
+                <div className="font-semibold text-white">{flight.speed}</div>
               </div>
               <div>
                 <div className="text-xs text-white/50">Altitude</div>
-                <div className="font-semibold text-white">{flightData.altitude}</div>
+                <div className="font-semibold text-white">{flight.altitude}</div>
               </div>
               <div>
                 <div className="text-xs text-white/50">Fleet Flight</div>
@@ -126,24 +128,24 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-sm text-white/50">Full Name</span>
-              <span className="font-medium text-white">{flightData.pilot}</span>
+              <span className="font-medium text-white">{flight.pilot}</span>
             </div>
 
-            {flightData.copilot && (
+            {flight.copilot && (
               <div className="flex justify-between items-center">
                 <span className="text-sm text-white/50">Co-Pilot</span>
-                <span className="font-medium text-white">{flightData.copilot}</span>
+                <span className="font-medium text-white">{flight.copilot}</span>
               </div>
             )}
 
             <div className="flex justify-between items-center">
               <span className="text-sm text-white/50">Passengers</span>
-              <span className="font-medium text-white">{flightData.passengers}</span>
+              <span className="font-medium text-white">{flight.passengers}</span>
             </div>
 
             <div className="flex justify-between items-center">
               <span className="text-sm text-white/50">Date Of Birth</span>
-              <span className="font-medium text-white">{flightData.date}</span>
+              <span className="font-medium text-white">{flight.date}</span>
             </div>
           </div>
 
@@ -153,15 +155,15 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
           <div className="grid grid-cols-3 gap-4">
             <div className="text-center">
               <div className="text-xs text-white/50 mb-1">Gate</div>
-              <div className="text-2xl font-bold text-white">{flightData.gate}</div>
+              <div className="text-2xl font-bold text-white">{flight.gate}</div>
             </div>
             <div className="text-center">
               <div className="text-xs text-white/50 mb-1">Flight No.</div>
-              <div className="text-2xl font-bold text-white">{flightData.terminal}</div>
+              <div className="text-2xl font-bold text-white">{flight.terminal}</div>
             </div>
             <div className="text-center">
               <div className="text-xs text-white/50 mb-1">Seat</div>
-              <div className="text-2xl font-bold text-white">{flightData.seat}</div>
+              <div className="text-2xl font-bold text-white">{flight.seat}</div>
             </div>
           </div>
 
@@ -171,24 +173,24 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-sm text-white/50">Fuel</span>
-              <span className="font-medium text-white">{flightData.fuel}</span>
+              <span className="font-medium text-white">{flight.fuel}</span>
             </div>
 
             <div className="flex justify-between items-center">
               <span className="text-sm text-white/50">Weight</span>
-              <span className="font-medium text-white">{flightData.weight}</span>
+              <span className="font-medium text-white">{flight.weight}</span>
             </div>
 
             <div className="flex justify-between items-center">
               <span className="text-sm text-white/50">Simulator</span>
               <Badge variant="secondary" className="bg-blue-500/20 text-blue-400 border-blue-500/30">
-                {flightData.simulator}
+                {flight.simulator}
               </Badge>
             </div>
 
             <div className="flex justify-between items-center">
               <span className="text-sm text-white/50">Class</span>
-              <span className="font-medium text-white">{flightData.class}</span>
+              <span className="font-medium text-white">{flight.class}</span>
             </div>
           </div>
 
@@ -201,7 +203,7 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
               </div>
               <div className="bg-white p-2 rounded">
                 <img 
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(flightData.trackingUrl)}`}
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(flight.trackingUrl)}`}
                   alt="QR Code"
                   className="w-20 h-20"
                 />
@@ -211,8 +213,8 @@ export function FlightDetailModal({ open, onOpenChange, flightData }: FlightDeta
 
           {/* Status badge */}
           <div className="mt-4 flex justify-center">
-            <Badge variant="secondary" className={`text-sm px-4 py-1.5 ${statusColorClasses[flightData.status]}`}>
-              {flightData.status}
+            <Badge variant="secondary" className={`text-sm px-4 py-1.5 ${statusColorClasses[flight.status]}`}>
+              {flight.status}
             </Badge>
           </div>
         </div>
