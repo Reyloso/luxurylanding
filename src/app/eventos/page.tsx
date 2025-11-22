@@ -1,90 +1,94 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar, MapPin, Users, Clock, Plane } from "lucide-react"
-
-const upcomingEvents = [
-  {
-    id: 1,
-    title: "Christmas Fly-In 2025",
-    date: "2025-12-24",
-    time: "19:00 - 23:00 UTC",
-    location: "ABC Aviation Event Center, 123 Airport Road, Londres, Reino Unido",
-    participants: "150+ pilotos",
-    description: "Únete a nuestra celebración navideña con vuelos desde toda Europa convergiendo en Londres. ATC completo garantizado. Disfruta de una noche especial volando con la comunidad.",
-    status: "Próximo",
-    image: "/evento1.jpg",
-    price: "$50.00",
-    month: "DEC",
-    day: "24"
-  },
-  {
-    id: 2,
-    title: "Transatlantic Challenge",
-    date: "2026-01-15",
-    time: "14:00 - 20:00 UTC",
-    location: "Virtual Event Center, Nueva York JFK → Londres Heathrow",
-    participants: "80 pilotos max",
-    description: "Competencia de vuelo transatlántico. Evaluación de eficiencia de combustible, puntualidad y procedimientos. Únete para demostrar tus habilidades en este desafío de largo alcance.",
-    status: "Inscripción Abierta",
-    image: "/evento1.jpg",
-    price: "Gratis",
-    month: "JAN",
-    day: "15"
-  },
-  {
-    id: 3,
-    title: "Asian Tour Week",
-    date: "2026-02-10",
-    time: "Durante toda la semana",
-    location: "Hub en Singapur - Rutas asiáticas",
-    participants: "Ilimitado",
-    description: "Semana de eventos volando rutas por Asia. Un vuelo diferente cada día con premios para participantes activos. Explora los destinos más fascinantes de Asia Oriental.",
-    status: "Próximamente",
-    image: "/evento1.jpg",
-    price: "$75.00",
-    month: "FEB",
-    day: "10"
-  }
-]
-
-const pastEvents = [
-  {
-    title: "European Autumn Tour",
-    date: "2025-10-15",
-    participants: "120 pilotos",
-    image: "🍂"
-  },
-  {
-    title: "Summer Festival Fly-In",
-    date: "2025-08-20",
-    participants: "200+ pilotos",
-    image: "☀️"
-  },
-  {
-    title: "World Tour Championship",
-    date: "2025-06-05",
-    participants: "95 pilotos",
-    image: "🏆"
-  }
-]
+import { useLanguage } from "@/contexts/language-context"
 
 export default function EventosPage() {
+  const { t } = useLanguage()
+  
+  const upcomingEvents = [
+    {
+      id: 1,
+      titleKey: 'events.christmasTitle',
+      date: "2025-12-24",
+      time: "19:00 - 23:00 UTC",
+      locationKey: 'events.location1',
+      participants: `150+ ${t('events.participants')}`,
+      descriptionKey: 'events.christmasDesc',
+      statusKey: 'events.upcoming',
+      image: "/evento1.jpg",
+      price: "$50.00",
+      month: "DEC",
+      day: "24"
+    },
+    {
+      id: 2,
+      titleKey: 'events.transatlanticTitle',
+      date: "2026-01-15",
+      time: "14:00 - 20:00 UTC",
+      locationKey: 'events.location2',
+      participants: `80 ${t('events.participantsMax')}`,
+      descriptionKey: 'events.transatlanticDesc',
+      statusKey: 'events.openRegistration',
+      image: "/evento1.jpg",
+      price: t('events.free'),
+      month: "JAN",
+      day: "15"
+    },
+    {
+      id: 3,
+      titleKey: 'events.asianTourTitle',
+      date: "2026-02-10",
+      time: t('events.allWeek'),
+      locationKey: 'events.location3',
+      participants: t('events.unlimited'),
+      descriptionKey: 'events.asianTourDesc',
+      statusKey: 'events.comingSoon',
+      image: "/evento1.jpg",
+      price: "$75.00",
+      month: "FEB",
+      day: "10"
+    }
+  ]
+
+  const pastEvents = [
+    {
+      titleKey: 'events.europeanAutumn',
+      date: "2025-10-15",
+      participants: `120 ${t('events.participants')}`,
+      image: "🍂"
+    },
+    {
+      titleKey: 'events.summerFestival',
+      date: "2025-08-20",
+      participants: `200+ ${t('events.participants')}`,
+      image: "☀️"
+    },
+    {
+      titleKey: 'events.worldTour',
+      date: "2025-06-05",
+      participants: `95 ${t('events.participants')}`,
+      image: "🏆"
+    }
+  ]
   return (
     <div className="container py-12 md:py-20">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <Badge variant="secondary" className="bg-amber-900/80 text-white border-amber-950/50">Comunidad</Badge>
-          <h1 className="text-4xl md:text-5xl font-bold text-white">Eventos</h1>
+          <Badge variant="secondary" className="bg-amber-900/80 text-white border-amber-950/50">{t('events.badge')}</Badge>
+          <h1 className="text-4xl md:text-5xl font-bold text-white">{t('events.title')}</h1>
           <p className="text-xl text-amber-200/90">
-            Únete a nuestros eventos especiales y vuela junto a la comunidad
+            {t('events.subtitle')}
           </p>
         </div>
 
         {/* Upcoming Events */}
         <div>
-          <h2 className="text-3xl font-bold mb-8 text-white">Noviembre 2025</h2>
+          <h2 className="text-3xl font-bold mb-8 text-white">{t('events.november')}</h2>
           <div className="space-y-6">
             {upcomingEvents.map((event) => (
               <div key={event.id} className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
@@ -110,18 +114,18 @@ export default function EventosPage() {
                               {event.time}
                             </div>
                             <h3 className="text-2xl font-bold text-gray-900 mb-2 hover:text-blue-600 cursor-pointer transition-colors">
-                              {event.title}
+                              {t(event.titleKey)}
                             </h3>
                           </div>
                         </div>
 
                         <div className="flex items-start gap-2 text-sm text-gray-700">
                           <MapPin className="h-4 w-4 mt-0.5 text-gray-400 flex-shrink-0" />
-                          <span>{event.location}</span>
+                          <span>{t(event.locationKey)}</span>
                         </div>
 
                         <p className="text-gray-600 text-sm leading-relaxed">
-                          {event.description}
+                          {t(event.descriptionKey)}
                         </p>
 
                         <div className="flex items-center gap-4 pt-2">
@@ -129,7 +133,7 @@ export default function EventosPage() {
                             className="bg-gray-900 hover:bg-gray-800 text-white underline"
                             size="sm"
                           >
-                            Ver Detalles
+                            {t('events.viewDetails')}
                           </Button>
                           <span className="text-sm font-semibold text-gray-900">
                             {event.price}
@@ -143,7 +147,7 @@ export default function EventosPage() {
                           {event.image.startsWith('/') ? (
                             <img 
                               src={event.image} 
-                              alt={event.title}
+                              alt={t(event.titleKey)}
                               className="w-full h-full object-cover"
                             />
                           ) : (
@@ -163,24 +167,23 @@ export default function EventosPage() {
 
         {/* December Section */}
         <div>
-          <h2 className="text-3xl font-bold mb-8 text-white">Diciembre 2025</h2>
+          <h2 className="text-3xl font-bold mb-8 text-white">{t('events.december')}</h2>
           <div className="bg-white rounded-lg p-8 text-center text-gray-500">
             <Calendar className="w-12 h-12 mx-auto mb-3 text-gray-400" />
-            <p>No hay eventos programados para este mes</p>
+            <p>{t('events.noEvents')}</p>
           </div>
         </div>
 
         {/* Event Types */}
         <div>
-          <h2 className="text-3xl font-bold mb-6 text-center">Tipos de Eventos</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center">{t('events.typesTitle')}</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <Card>
               <CardHeader>
                 <Plane className="h-10 w-10 mb-2 text-primary" />
-                <CardTitle>Fly-Ins</CardTitle>
+                <CardTitle>{t('events.flyInsTitle')}</CardTitle>
                 <CardDescription>
-                  Eventos masivos donde pilotos de todo el mundo vuelan hacia un destino común. 
-                  ATC completo y premios para participantes.
+                  {t('events.flyInsDesc')}
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -188,10 +191,9 @@ export default function EventosPage() {
             <Card>
               <CardHeader>
                 <Users className="h-10 w-10 mb-2 text-primary" />
-                <CardTitle>Tours</CardTitle>
+                <CardTitle>{t('events.toursTitle')}</CardTitle>
                 <CardDescription>
-                  Eventos de múltiples días explorando diferentes regiones. Vuela una ruta 
-                  diferente cada día y acumula puntos.
+                  {t('events.toursDesc')}
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -199,10 +201,9 @@ export default function EventosPage() {
             <Card>
               <CardHeader>
                 <Calendar className="h-10 w-10 mb-2 text-primary" />
-                <CardTitle>Competencias</CardTitle>
+                <CardTitle>{t('events.competitionsTitle')}</CardTitle>
                 <CardDescription>
-                  Desafíos de habilidad evaluando eficiencia, procedimientos y puntualidad. 
-                  Premios para los mejores pilotos.
+                  {t('events.competitionsDesc')}
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -211,13 +212,13 @@ export default function EventosPage() {
 
         {/* Past Events */}
         <div>
-          <h2 className="text-3xl font-bold mb-6">Eventos Anteriores</h2>
+          <h2 className="text-3xl font-bold mb-6">{t('events.pastTitle')}</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {pastEvents.map((event, index) => (
               <Card key={index}>
                 <CardHeader>
                   <div className="text-5xl mb-4">{event.image}</div>
-                  <CardTitle>{event.title}</CardTitle>
+                  <CardTitle>{t(event.titleKey)}</CardTitle>
                   <CardDescription>
                     <div className="flex items-center gap-2 mt-2">
                       <Calendar className="h-3 w-3" />
@@ -247,14 +248,13 @@ export default function EventosPage() {
           ></div>
           <CardContent className="relative p-12 text-center space-y-4 z-10">
             <h3 className="text-3xl font-bold">
-              ¿Quieres organizar un evento?
+              {t('events.ctaTitle')}
             </h3>
             <p className="text-lg opacity-90 max-w-2xl mx-auto">
-              Si tienes una idea para un evento especial o quieres colaborar con nosotros, 
-              contáctanos. ¡Siempre buscamos nuevas formas de unir a la comunidad!
+              {t('events.ctaDesc')}
             </p>
             <Button size="lg" variant="secondary">
-              Proponer un Evento
+              {t('events.proposeEvent')}
             </Button>
           </CardContent>
         </Card>

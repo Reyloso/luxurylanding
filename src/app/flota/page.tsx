@@ -4,10 +4,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Plane, Users, Gauge } from "lucide-react"
 import { useState, useRef, MouseEvent } from "react"
+import { useLanguage } from "@/contexts/language-context"
 
 const fleet = [
   {
-    category: "Corto Alcance",
+    categoryKey: 'fleet.category.short',
     aircraft: [
       {
         name: "Boeing 737-800",
@@ -21,7 +22,7 @@ const fleet = [
         engines: "2x CFM56-7B27",
         wingspan: "117.5 ft (35.8 m)",
         tailHeight: "41.2 ft (12.5 m)",
-        description: "El workhorse confiable para rutas de corto y medio alcance."
+        descriptionKey: "fleet.aircraft.b737800.desc"
       },
       {
         name: "Boeing 737 MAX 8",
@@ -35,7 +36,7 @@ const fleet = [
         engines: "2x LEAP-1B",
         wingspan: "117.8 ft (35.9 m)",
         tailHeight: "40.4 ft (12.3 m)",
-        description: "La última generación con mayor eficiencia y alcance extendido."
+        descriptionKey: "fleet.aircraft.b737max8.desc"
       },
       {
         name: "Airbus A320neo",
@@ -49,12 +50,12 @@ const fleet = [
         engines: "2x PW1127G",
         wingspan: "117.5 ft (35.8 m)",
         tailHeight: "38.6 ft (11.8 m)",
-        description: "Tecnología de nueva generación con motores eco-eficientes."
+        descriptionKey: "fleet.aircraft.a320neo.desc"
       }
     ]
   },
   {
-    category: "Medio Alcance",
+    categoryKey: 'fleet.category.medium',
     aircraft: [
       {
         name: "Boeing 767-300ER",
@@ -68,7 +69,7 @@ const fleet = [
         engines: "2x CF6-80C2B6",
         wingspan: "156.1 ft (47.6 m)",
         tailHeight: "52.0 ft (15.8 m)",
-        description: "Versátil widebody ideal para rutas transatlánticas."
+        descriptionKey: "fleet.aircraft.b767300er.desc"
       },
       {
         name: "Airbus A330-300",
@@ -82,12 +83,12 @@ const fleet = [
         engines: "2x Trent 772B",
         wingspan: "197.8 ft (60.3 m)",
         tailHeight: "55.4 ft (16.9 m)",
-        description: "Amplio y confortable para vuelos intercontinentales."
+        descriptionKey: "fleet.aircraft.a330300.desc"
       }
     ]
   },
   {
-    category: "Largo Alcance",
+    categoryKey: 'fleet.category.long',
     aircraft: [
       {
         name: "Boeing 787-9 Dreamliner",
@@ -101,7 +102,7 @@ const fleet = [
         engines: "2x GEnx-1B76",
         wingspan: "197.3 ft (60.1 m)",
         tailHeight: "55.9 ft (17.0 m)",
-        description: "El Dreamliner de última generación con máxima eficiencia."
+        descriptionKey: "fleet.aircraft.b7879.desc"
       },
       {
         name: "Boeing 777-300ER",
@@ -115,7 +116,7 @@ const fleet = [
         engines: "2x GE90-115B",
         wingspan: "212.6 ft (64.8 m)",
         tailHeight: "60.9 ft (18.5 m)",
-        description: "El gigante de largo alcance para rutas intercontinentales."
+        descriptionKey: "fleet.aircraft.b777300er.desc"
       },
       {
         name: "Airbus A350-900",
@@ -129,13 +130,14 @@ const fleet = [
         engines: "2x Trent XWB-84",
         wingspan: "212.4 ft (64.8 m)",
         tailHeight: "56.0 ft (17.1 m)",
-        description: "El avión más avanzado de Airbus con tecnología de punta."
+        descriptionKey: "fleet.aircraft.a350900.desc"
       }
     ]
   }
 ]
 
 export default function FleetPage() {
+  const { t } = useLanguage()
   const [hoveredCard, setHoveredCard] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({})
@@ -166,10 +168,10 @@ export default function FleetPage() {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <Badge variant="secondary" className="bg-amber-900/80 text-white border-gray-800">Nuestra Flota</Badge>
-          <h1 className="text-4xl md:text-5xl font-bold text-white">Flota de Aeronaves</h1>
+          <Badge variant="secondary" className="bg-amber-900/80 text-white border-gray-800">{t('fleet.badge')}</Badge>
+          <h1 className="text-4xl md:text-5xl font-bold text-white">{t('fleet.title')}</h1>
           <p className="text-xl text-amber-200/90">
-            Aeronaves modernas de última generación para todas tus rutas
+            {t('fleet.subtitle')}
           </p>
         </div>
 
@@ -178,34 +180,34 @@ export default function FleetPage() {
           <Card className="bg-[#161616] text-white border-gray-800">
             <CardContent className="p-6 text-center">
               <div className="text-3xl font-bold text-amber-400 mb-1">8</div>
-              <div className="text-sm text-white/60">Tipos de Aeronave</div>
+              <div className="text-sm text-white/60">{t('fleet.stats.types')}</div>
             </CardContent>
           </Card>
           <Card className="bg-[#161616] text-white border-gray-800">
             <CardContent className="p-6 text-center">
               <div className="text-3xl font-bold text-amber-400 mb-1">45</div>
-              <div className="text-sm text-white/60">Aeronaves Totales</div>
+              <div className="text-sm text-white/60">{t('fleet.stats.total')}</div>
             </CardContent>
           </Card>
           <Card className="bg-[#161616] text-white border-gray-800">
             <CardContent className="p-6 text-center">
               <div className="text-3xl font-bold text-amber-400 mb-1">3.2</div>
-              <div className="text-sm text-white/60">Años Promedio</div>
+              <div className="text-sm text-white/60">{t('fleet.stats.age')}</div>
             </CardContent>
           </Card>
           <Card className="bg-[#161616] text-white border-gray-800">
             <CardContent className="p-6 text-center">
               <div className="text-3xl font-bold text-amber-400 mb-1">98%</div>
-              <div className="text-sm text-white/60">Disponibilidad</div>
+              <div className="text-sm text-white/60">{t('fleet.stats.availability')}</div>
             </CardContent>
           </Card>
         </div>
 
         {/* Fleet by Category */}
         {fleet.map((category) => (
-          <div key={category.category} className="space-y-6">
+          <div key={category.categoryKey} className="space-y-6">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-white mb-2">{category.category}</h2>
+              <h2 className="text-3xl font-bold text-white mb-2">{t(category.categoryKey)}</h2>
               <div className="h-1 w-20 bg-amber-400 mx-auto rounded-full"></div>
             </div>
 
@@ -282,27 +284,27 @@ export default function FleetPage() {
                       <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 via-black/60 to-transparent">
                         <div className="grid grid-cols-2 gap-3 text-white text-sm">
                           <div>
-                            <p className="text-white/60 text-xs uppercase tracking-wide">Speed</p>
+                            <p className="text-white/60 text-xs uppercase tracking-wide">{t('fleet.spec.speed')}</p>
                             <p className="font-bold">{aircraft.speed}</p>
                           </div>
                           <div>
-                            <p className="text-white/60 text-xs uppercase tracking-wide">Range</p>
+                            <p className="text-white/60 text-xs uppercase tracking-wide">{t('fleet.spec.range')}</p>
                             <p className="font-bold">{aircraft.range}</p>
                           </div>
                           <div>
-                            <p className="text-white/60 text-xs uppercase tracking-wide">Engines</p>
+                            <p className="text-white/60 text-xs uppercase tracking-wide">{t('fleet.spec.engines')}</p>
                             <p className="font-bold text-xs">{aircraft.engines}</p>
                           </div>
                           <div>
-                            <p className="text-white/60 text-xs uppercase tracking-wide">Wing Span</p>
+                            <p className="text-white/60 text-xs uppercase tracking-wide">{t('fleet.spec.wingspan')}</p>
                             <p className="font-bold text-xs">{aircraft.wingspan}</p>
                           </div>
                           <div>
-                            <p className="text-white/60 text-xs uppercase tracking-wide">Tail Height</p>
+                            <p className="text-white/60 text-xs uppercase tracking-wide">{t('fleet.spec.tailHeight')}</p>
                             <p className="font-bold text-xs">{aircraft.tailHeight}</p>
                           </div>
                           <div>
-                            <p className="text-white/60 text-xs uppercase tracking-wide">Seats</p>
+                            <p className="text-white/60 text-xs uppercase tracking-wide">{t('fleet.spec.seats')}</p>
                             <p className="font-bold">{aircraft.passengers}</p>
                           </div>
                         </div>
@@ -326,7 +328,7 @@ export default function FleetPage() {
                         {aircraft.registration}
                       </h4>
                       <p className="text-sm text-white/90 font-medium">
-                        {aircraft.description}
+                        {t(aircraft.descriptionKey)}
                       </p>
                     </div>
                   </div>
@@ -339,24 +341,20 @@ export default function FleetPage() {
         {/* Fleet Info */}
         <Card className="bg-[#161616] text-white border-gray-800">
           <CardHeader>
-            <CardTitle>Información de la Flota</CardTitle>
+            <CardTitle>{t('fleet.info.title')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold mb-2">Libreas Disponibles</h4>
+                <h4 className="font-semibold mb-2">{t('fleet.info.liveries.title')}</h4>
                 <p className="text-sm text-white/70">
-                  Todas nuestras aeronaves cuentan con libreas oficiales de LuxuryAir 
-                  disponibles para descarga gratuita. Compatible con los principales 
-                  simuladores: MSFS2020, X-Plane 12, y P3D.
+                  {t('fleet.info.liveries.desc')}
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold mb-2">Requisitos de Modelo</h4>
+                <h4 className="font-semibold mb-2">{t('fleet.info.models.title')}</h4>
                 <p className="text-sm text-white/70">
-                  Para mantener el realismo, requerimos modelos de alta calidad como 
-                  PMDG, Fenix Simulations, Flight Factor, o Toliss. Consulta la lista 
-                  completa de aeronaves aprobadas en el manual de operaciones.
+                  {t('fleet.info.models.desc')}
                 </p>
               </div>
             </div>

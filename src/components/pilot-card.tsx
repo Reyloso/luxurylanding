@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useState } from "react"
 import Image from "next/image"
+import { useLanguage } from "@/contexts/language-context"
 
 interface PilotCardProps {
   name: string
@@ -35,6 +36,7 @@ export function PilotCard({
   organization = "LUXURY AIR"
 }: PilotCardProps) {
   const [isFlipped, setIsFlipped] = useState(false)
+  const { t } = useLanguage()
 
   return (
     <div 
@@ -61,19 +63,19 @@ export function PilotCard({
               {/* Stats Grid */}
               <div className="grid grid-cols-2 gap-1.5 text-[8px]">
                 <div className="min-w-0">
-                  <div className="text-white/50 mb-0.5">FLIGHTS</div>
+                  <div className="text-white/50 mb-0.5">{t('pilot.flights')}</div>
                   <div className="font-bold text-xs truncate">{totalFlights}</div>
                 </div>
                 <div className="min-w-0">
-                  <div className="text-white/50 mb-0.5">HOURS</div>
+                  <div className="text-white/50 mb-0.5">{t('pilot.hours')}</div>
                   <div className="font-bold text-xs truncate">{totalHours}</div>
                 </div>
                 <div className="min-w-0">
-                  <div className="text-white/50 mb-0.5">RANK</div>
+                  <div className="text-white/50 mb-0.5">{t('pilot.rank')}</div>
                   <div className="font-bold text-[9px] truncate">{rank}</div>
                 </div>
                 <div className="min-w-0">
-                  <div className="text-white/50 mb-0.5">REF</div>
+                  <div className="text-white/50 mb-0.5">{t('pilot.ref')}</div>
                   <div className="font-bold text-[9px] truncate">{referenceId}</div>
                 </div>
               </div>
@@ -122,16 +124,16 @@ export function PilotCard({
             {/* Flight Details */}
             <div className="flex-1 flex items-center justify-center min-w-0 relative z-10">
               <div className="text-center w-full px-2">
-                <div className="text-white/50 text-[8px] mb-1">LAST ROUTE</div>
+                <div className="text-white/50 text-[8px] mb-1">{t('pilot.lastRoute')}</div>
                 <div className="text-xl font-bold tracking-wider mb-2 truncate">{recentFlight}</div>
                 
                 <div className="flex gap-3 justify-center text-[8px] mt-2">
                   <div className="min-w-0">
-                    <div className="text-white/50 mb-0.5">CALLSIGN</div>
+                    <div className="text-white/50 mb-0.5">{t('pilot.callsign')}</div>
                     <div className="font-bold text-xs truncate">{callsign}</div>
                   </div>
                   <div className="min-w-0">
-                    <div className="text-white/50 mb-0.5">HOURS</div>
+                    <div className="text-white/50 mb-0.5">{t('pilot.hours')}</div>
                     <div className="font-bold text-xs truncate">{totalHours}</div>
                   </div>
                 </div>

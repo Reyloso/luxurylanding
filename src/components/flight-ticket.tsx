@@ -1,7 +1,10 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Plane } from "lucide-react"
 import Image from "next/image"
+import { useLanguage } from "@/contexts/language-context"
 
 interface FlightTicketProps {
   origin: string
@@ -45,6 +48,8 @@ export function FlightTicket({
   iconColor,
   onClick,
 }: FlightTicketProps) {
+  const { t } = useLanguage()
+  
   return (
     <Card 
       className="overflow-hidden hover:shadow-lg transition-shadow w-full cursor-pointer bg-black text-white border-amber-900/30"
@@ -89,25 +94,25 @@ export function FlightTicket({
         {/* Bottom Section - Flight Details in Grid */}
         <div className="grid grid-cols-5 gap-4 text-center relative z-10">
           <div>
-            <div className="text-[9px] text-white/50 mb-1 uppercase">Passenger</div>
+            <div className="text-[9px] text-white/50 mb-1 uppercase">{t('ticket.passenger')}</div>
             <div className="text-xs font-medium truncate">{pilot}</div>
           </div>
           <div>
-            <div className="text-[9px] text-white/50 mb-1 uppercase">Flight</div>
+            <div className="text-[9px] text-white/50 mb-1 uppercase">{t('ticket.flight')}</div>
             <div className="text-xs font-medium">{flightNumber}</div>
           </div>
           <div>
-            <div className="text-[9px] text-white/50 mb-1 uppercase">Date</div>
+            <div className="text-[9px] text-white/50 mb-1 uppercase">{t('ticket.date')}</div>
             <div className="text-xs font-medium">{date}</div>
           </div>
           <div>
-            <div className="text-[9px] text-white/50 mb-1 uppercase">Status</div>
+            <div className="text-[9px] text-white/50 mb-1 uppercase">{t('ticket.status')}</div>
             <Badge variant="secondary" className={`text-[9px] px-1.5 py-0.5 ${statusColorClasses[status]}`}>
-              {status}
+              {t(`status.${status.toLowerCase().replace(/ /g, '')}`)}
             </Badge>
           </div>
           <div>
-            <div className="text-[9px] text-white/50 mb-1 uppercase">Terminal</div>
+            <div className="text-[9px] text-white/50 mb-1 uppercase">{t('ticket.terminal')}</div>
             <div className="text-xs font-medium">T4</div>
           </div>
         </div>

@@ -7,8 +7,10 @@ import { FlightDetailModal } from "@/components/flight-detail-modal"
 import { PilotCard } from "@/components/pilot-card"
 import { CheckCircle, Plane, Users, TrendingUp, Activity, MapPin, Clock, AlertCircle } from "lucide-react"
 import { useState } from "react"
+import { useLanguage } from "@/contexts/language-context"
 
 export default function OperacionPage() {
+  const { t, language } = useLanguage()
   const [selectedFlight, setSelectedFlight] = useState<any>(null)
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -182,16 +184,16 @@ export default function OperacionPage() {
           <div>
             <div className="flex items-center gap-3 mb-2">
               <Badge variant="secondary" className="bg-amber-900/80 text-white border-amber-950/50">
-                Centro de Operaciones
+                {t('ops.title')}
               </Badge>
               <Badge variant="outline" className="bg-green-900/20 text-green-400 border-green-800">
                 <Activity className="w-3 h-3 mr-1" />
-                En Vivo
+                {t('ops.live')}
               </Badge>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white">Panel de Control</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white">{t('ops.controlPanel')}</h1>
             <p className="text-amber-200/90 mt-2">
-              Operaciones en tiempo real - {new Date().toLocaleDateString('es-ES', { 
+              {t('ops.realTimeOps')} - {new Date().toLocaleDateString(language === 'es' ? 'es-ES' : 'en-US', { 
                 weekday: 'long', 
                 year: 'numeric', 
                 month: 'long', 
@@ -207,7 +209,7 @@ export default function OperacionPage() {
             <CardContent className="p-4 md:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-400 mb-1">Vuelos Activos</p>
+                  <p className="text-sm text-gray-400 mb-1">{t('ops.activeFlights')}</p>
                   <p className="text-3xl font-bold text-white">{liveFlights.length}</p>
                 </div>
                 <Plane className="h-10 w-10 text-green-400" />
@@ -220,7 +222,7 @@ export default function OperacionPage() {
             <CardContent className="p-4 md:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-400 mb-1">Vuelos Hoy</p>
+                  <p className="text-sm text-gray-400 mb-1">{t('ops.todayFlights')}</p>
                   <p className="text-3xl font-bold text-white">{liveFlights.length + todaysFlights.length}</p>
                 </div>
                 <Clock className="h-10 w-10 text-amber-400" />
@@ -241,10 +243,10 @@ export default function OperacionPage() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-white flex items-center gap-2">
                     <MapPin className="h-5 w-5 text-amber-400" />
-                    Mapa de Operaciones
+                    {t('ops.operationsMap')}
                   </CardTitle>
                   <Badge variant="outline" className="bg-green-900/20 text-green-400 border-green-800">
-                    3 Vuelos Activos
+                    {liveFlights.length} {t('ops.activeFlightsLabel')}
                   </Badge>
                 </div>
               </CardHeader>
@@ -265,10 +267,10 @@ export default function OperacionPage() {
               <CardHeader className="pt-6 px-6 pb-0">
                 <CardTitle className="text-white flex items-center gap-2">
                   <Plane className="h-5 w-5 text-green-400" />
-                  Vuelos en Vivo
+                  {t('ops.liveFlights')}
                 </CardTitle>
                 <CardDescription className="text-gray-400">
-                  Operaciones activas en este momento
+                  {t('ops.activeOps')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4 p-6">
@@ -285,10 +287,10 @@ export default function OperacionPage() {
               <CardHeader className="pt-6 px-6 pb-0">
                 <CardTitle className="text-white flex items-center gap-2">
                   <Clock className="h-5 w-5 text-amber-400" />
-                  Programación del Día
+                  {t('ops.todaySchedule')}
                 </CardTitle>
                 <CardDescription className="text-gray-400">
-                  Vuelos programados para hoy
+                  {t('ops.scheduledFlights')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-6">
@@ -300,31 +302,31 @@ export default function OperacionPage() {
                       <div className="w-6 h-6 bg-amber-500 rounded flex items-center justify-center">
                         <Plane className="h-4 w-4 text-black" />
                       </div>
-                      <span className="text-amber-400 font-bold text-sm tracking-wider">DEPARTURES</span>
+                      <span className="text-amber-400 font-bold text-sm tracking-wider">{t('board.departures')}</span>
                     </div>
                     <div className="flex items-center gap-4">
                       <div className="text-right">
                         <div className="text-amber-400 font-mono text-lg font-bold">
-                          {new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
+                          {new Date().toLocaleTimeString(language === 'es' ? 'es-ES' : 'en-US', { hour: '2-digit', minute: '2-digit' })}
                         </div>
-                        <div className="text-amber-400/60 text-[10px] font-mono">LOCAL</div>
+                        <div className="text-amber-400/60 text-[10px] font-mono">{t('board.local')}</div>
                       </div>
                       <div className="text-right">
                         <div className="text-amber-400 font-mono text-lg font-bold">
                           {new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })}
                         </div>
-                        <div className="text-amber-400/60 text-[10px] font-mono">ZULU</div>
+                        <div className="text-amber-400/60 text-[10px] font-mono">{t('board.zulu')}</div>
                       </div>
                     </div>
                   </div>
 
                   {/* Table Header */}
                   <div className="grid grid-cols-12 gap-2 px-4 py-2 bg-black/80 border-b border-gray-800 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                    <div className="col-span-2">Time (Local)</div>
-                    <div className="col-span-3">Destination</div>
-                    <div className="col-span-2">Flight</div>
-                    <div className="col-span-2">Captain</div>
-                    <div className="col-span-3">Remarks</div>
+                    <div className="col-span-2">{t('board.time')}</div>
+                    <div className="col-span-3">{t('board.destination')}</div>
+                    <div className="col-span-2">{t('board.flight')}</div>
+                    <div className="col-span-2">{t('board.captain')}</div>
+                    <div className="col-span-3">{t('board.remarks')}</div>
                   </div>
 
                   {/* Table Body */}
@@ -360,7 +362,7 @@ export default function OperacionPage() {
                           <span className={`text-xs font-bold uppercase tracking-wider ${
                             flight.status === 'Embarcando' ? 'text-amber-400' : 'text-green-400'
                           }`}>
-                            {flight.status === 'Embarcando' ? 'Boarding' : 'On Time'}
+                            {flight.status === 'Embarcando' ? t('board.boarding') : t('board.onTime')}
                           </span>
                         </div>
                       </div>
@@ -378,10 +380,10 @@ export default function OperacionPage() {
               <CardHeader className="pt-6 px-6 pb-0">
                 <CardTitle className="text-white flex items-center gap-2">
                   <Users className="h-5 w-5 text-blue-400" />
-                  Pilotos Activos
+                  {t('ops.activePilots')}
                 </CardTitle>
                 <CardDescription className="text-gray-400">
-                  En línea ahora mismo
+                  {t('ops.onlineNow')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4 p-6">
@@ -396,10 +398,10 @@ export default function OperacionPage() {
               <CardHeader className="pt-6 px-6 pb-0">
                 <CardTitle className="text-white flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-green-400" />
-                  Actividad de Vuelos
+                  {t('ops.flightActivity')}
                 </CardTitle>
                 <CardDescription className="text-gray-400">
-                  Últimas 24 horas
+                  {t('ops.last24h')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-6">
@@ -418,11 +420,11 @@ export default function OperacionPage() {
                   </div>
                   <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-800">
                     <div>
-                      <p className="text-sm text-gray-400">Vuelos Completados</p>
+                      <p className="text-sm text-gray-400">{t('ops.completedFlights')}</p>
                       <p className="text-2xl font-bold text-white">127</p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-400">Horas Totales</p>
+                      <p className="text-sm text-gray-400">{t('ops.totalHours')}</p>
                       <p className="text-2xl font-bold text-white">1,453h</p>
                     </div>
                   </div>
@@ -435,7 +437,7 @@ export default function OperacionPage() {
               <CardHeader className="pt-6 px-6 pb-0">
                 <CardTitle className="text-white flex items-center gap-2">
                   <Activity className="h-5 w-5 text-green-400" />
-                  Estado del Sistema
+                  {t('ops.systemStatus')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3 p-6">
@@ -445,7 +447,7 @@ export default function OperacionPage() {
                     <span className="text-sm text-gray-300">ACARS</span>
                   </div>
                   <Badge variant="outline" className="bg-green-900/20 text-green-400 border-green-800 text-xs">
-                    Operacional
+                    {t('ops.operational')}
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between">
@@ -454,7 +456,7 @@ export default function OperacionPage() {
                     <span className="text-sm text-gray-300">IVAO Network</span>
                   </div>
                   <Badge variant="outline" className="bg-green-900/20 text-green-400 border-green-800 text-xs">
-                    Conectado
+                    {t('ops.connected')}
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between">
@@ -463,7 +465,7 @@ export default function OperacionPage() {
                     <span className="text-sm text-gray-300">FlightPlan API</span>
                   </div>
                   <Badge variant="outline" className="bg-green-900/20 text-green-400 border-green-800 text-xs">
-                    Online
+                    {t('ops.online')}
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between">
@@ -472,7 +474,7 @@ export default function OperacionPage() {
                     <span className="text-sm text-gray-300">Weather Service</span>
                   </div>
                   <Badge variant="outline" className="bg-amber-900/20 text-amber-400 border-amber-800 text-xs">
-                    Lento
+                    {t('ops.slow')}
                   </Badge>
                 </div>
               </CardContent>
