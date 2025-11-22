@@ -99,43 +99,43 @@ const fleet = [
         speed: "587 mph (945 km/h)",
         range: "8,786 mi (14,140 km)",
         engines: "2x GEnx-1B76",
-        wingspan: "197.0 ft (60.1 m)",
+        wingspan: "197.3 ft (60.1 m)",
         tailHeight: "55.9 ft (17.0 m)",
-        description: "El futuro de la aviación con materiales compuestos avanzados."
+        description: "El Dreamliner de última generación con máxima eficiencia."
       },
       {
         name: "Boeing 777-300ER",
         model: "B77W",
-        registration: "LXA-77W",
+        registration: "LXA-777",
         year: "2016",
         passengers: 396,
         seats: "396 (42J + 354Y)",
         speed: "590 mph (950 km/h)",
-        range: "8,481 mi (13,650 km)",
+        range: "9,395 mi (15,118 km)",
         engines: "2x GE90-115B",
         wingspan: "212.6 ft (64.8 m)",
         tailHeight: "60.9 ft (18.5 m)",
-        description: "El gigante de largo alcance con capacidad excepcional."
+        description: "El gigante de largo alcance para rutas intercontinentales."
       },
       {
         name: "Airbus A350-900",
         model: "A359",
         registration: "LXA-359",
-        year: "2022",
+        year: "2021",
         passengers: 325,
-        seats: "325 (48J + 277Y)",
+        seats: "325 (40J + 285Y)",
         speed: "561 mph (903 km/h)",
-        range: "9,320 mi (15,000 km)",
-        engines: "2x Rolls Royce Trent XWB",
-        wingspan: "212.4 ft (64.7 m)",
-        tailHeight: "55.9 ft (16.7 m)",
-        description: "Lo último en tecnología aeroespacial y eficiencia."
+        range: "9,700 mi (15,600 km)",
+        engines: "2x Trent XWB-84",
+        wingspan: "212.4 ft (64.8 m)",
+        tailHeight: "56.0 ft (17.1 m)",
+        description: "El avión más avanzado de Airbus con tecnología de punta."
       }
     ]
   }
 ]
 
-export default function FlotaPage() {
+export default function FleetPage() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({})
@@ -147,14 +147,14 @@ export default function FlotaPage() {
     const rect = card.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
-    
     const centerX = rect.width / 2
     const centerY = rect.height / 2
-    
+
     const rotateX = ((y - centerY) / centerY) * -5
     const rotateY = ((x - centerX) / centerX) * 5
-    
+
     setMousePosition({ x: rotateX, y: rotateY })
+    setHoveredCard(registration)
   }
 
   const handleMouseLeave = () => {
@@ -203,34 +203,29 @@ export default function FlotaPage() {
 
         {/* Fleet by Category */}
         {fleet.map((category) => (
-          <div key={category.category}>
-            <h2 className="text-3xl font-bold mb-6 text-white">
-              {category.category}
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div key={category.category} className="space-y-6">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-white mb-2">{category.category}</h2>
+              <div className="h-1 w-20 bg-amber-400 mx-auto rounded-full"></div>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {category.aircraft.map((aircraft) => (
                 <div
                   key={aircraft.registration}
-                  ref={(el) => { cardRefs.current[aircraft.registration] = el }}
                   className="relative"
                   style={{ perspective: '1000px' }}
-                  onMouseMove={(e) => {
-                    setHoveredCard(aircraft.registration)
-                    handleMouseMove(e, aircraft.registration)
-                  }}
-                  onMouseLeave={() => {
-                    setHoveredCard(null)
-                    handleMouseLeave()
-                  }}
+                  onMouseMove={(e) => handleMouseMove(e, aircraft.registration)}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  {/* Card Container */}
                   <div
-                    className="relative rounded-2xl transition-all duration-300 ease-out cursor-pointer"
+                    ref={(el) => { cardRefs.current[aircraft.registration] = el }}
+                    className="relative transition-all duration-300 ease-out"
                     style={{
                       transform: hoveredCard === aircraft.registration
                         ? `rotateX(${mousePosition.x}deg) rotateY(${mousePosition.y}deg) scale(1.02)`
                         : 'rotateX(0deg) rotateY(0deg) scale(1)',
-                      transformStyle: 'preserve-3d',
+                      transformStyle: 'preserve-3d'
                     }}
                   >
                     {/* Main Card */}
@@ -242,6 +237,15 @@ export default function FlotaPage() {
                           : '0 10px 30px rgba(0, 0, 0, 0.5)'
                       }}
                     >
+                      {/* Watermark logo in bottom right */}
+                      <div className="absolute bottom-4 right-4 opacity-20 z-[5]">
+                        <img 
+                          src="/logo1.png" 
+                          alt="LuxuryAir Watermark" 
+                          className="w-40 h-40 object-contain"
+                        />
+                      </div>
+
                       {/* Header with aircraft name */}
                       <div className="absolute top-0 left-0 right-0 p-6 bg-gradient-to-b from-black/60 to-transparent z-10">
                         <div className="flex justify-between items-start">
@@ -251,8 +255,12 @@ export default function FlotaPage() {
                             </h3>
                             <p className="text-amber-400 text-sm font-mono mt-1">{aircraft.model}</p>
                           </div>
-                          <div className="w-16 h-16 bg-gradient-to-br from-red-600 to-amber-600 rounded-lg flex items-center justify-center">
-                            <Plane className="w-10 h-10 text-white" />
+                          <div className="relative w-16 h-16 bg-gradient-to-br from-red-600 to-amber-600 rounded-lg flex items-center justify-center overflow-hidden">
+                            <img 
+                              src="/logo2.png" 
+                              alt="LuxuryAir" 
+                              className="w-14 h-14 object-contain"
+                            />
                           </div>
                         </div>
                       </div>

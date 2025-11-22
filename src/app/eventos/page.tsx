@@ -199,8 +199,12 @@ export default function EventosPage() {
         </div>
 
         {/* CTA */}
-        <Card className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
-          <CardContent className="p-12 text-center space-y-4">
+        <Card className="relative overflow-hidden bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-40"
+            style={{ backgroundImage: "url('/luxurycolas2.webp')" }}
+          ></div>
+          <CardContent className="relative p-12 text-center space-y-4 z-10">
             <h3 className="text-3xl font-bold">
               ¿Quieres organizar un evento?
             </h3>

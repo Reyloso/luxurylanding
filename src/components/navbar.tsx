@@ -26,6 +26,7 @@ const navItems = [
   { href: "/operacion", label: "Operación" },
   { href: "/pilotos", label: "Pilotos" },
   { href: "/flota", label: "Flota" },
+  { href: "/trading-cards", label: "Trading Cards" },
   { href: "/noticias", label: "Noticias" },
   { href: "/eventos", label: "Eventos" },
   { href: "/contacto", label: "Contáctanos" },
