@@ -97,7 +97,7 @@ export default function OperacionPage() {
     {
       origin: "BCN",
       destination: "MIA",
-      departureTime: "18:45 PM",
+      departureTime: "18:45",
       arrivalTime: "23:30 PM",
       duration: "10h 45m",
       date: "22 Nov, 2024",
@@ -105,12 +105,13 @@ export default function OperacionPage() {
       status: "Programado" as const,
       iconColor: "orange" as const,
       aircraft: "Boeing 787-9",
-      pilot: "Miguel Torres"
+      pilot: "Miguel Torres",
+      gate: "A7"
     },
     {
       origin: "FRA",
       destination: "LAX",
-      departureTime: "20:00 PM",
+      departureTime: "20:00",
       arrivalTime: "01:15 AM",
       duration: "11h 15m",
       date: "22 Nov, 2024",
@@ -118,12 +119,13 @@ export default function OperacionPage() {
       status: "Programado" as const,
       iconColor: "pink" as const,
       aircraft: "Airbus A350-900",
-      pilot: "Hans Mueller"
+      pilot: "Hans Mueller",
+      gate: "B12"
     },
     {
       origin: "CDG",
       destination: "HND",
-      departureTime: "23:30 PM",
+      departureTime: "23:30",
       arrivalTime: "18:45 PM",
       duration: "12h 15m",
       date: "22 Nov, 2024",
@@ -131,7 +133,8 @@ export default function OperacionPage() {
       status: "Embarcando" as const,
       iconColor: "cyan" as const,
       aircraft: "Boeing 777-300ER",
-      pilot: "Pierre Dubois"
+      pilot: "Pierre Dubois",
+      gate: "C5"
     }
   ]
 
@@ -246,33 +249,13 @@ export default function OperacionPage() {
                 </div>
               </CardHeader>
               <CardContent className="p-6">
-                <div className="relative w-full h-[350px] bg-gray-900 rounded-lg overflow-hidden">
-                  <img 
-                    src="/world-map.jpg" 
-                    alt="Mapa Mundial" 
-                    className="w-full h-full object-cover opacity-40"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none'
-                      e.currentTarget.parentElement!.classList.add('flex', 'items-center', 'justify-center')
-                    }}
+                <div className="relative w-full h-[350px] rounded-lg overflow-hidden">
+                  <iframe
+                    src="https://newsky.app/airline/public/map?style=light&token=LXY_dDkkE8VPZAvJN4x2ouvaaBxujjCiMX"
+                    className="w-full h-full"
+                    title="Live Flight Tracking"
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 flex items-center justify-center text-gray-500">
-                    <div className="text-center">
-                      <MapPin className="h-16 w-16 mx-auto mb-3 text-amber-400/50" />
-                      <p className="text-lg font-semibold">Mapa de Rutas Global</p>
-                      <p className="text-sm mt-1">Tracking en tiempo real de todos los vuelos</p>
-                    </div>
-                  </div>
-                  {/* Flight markers simulation */}
-                  <div className="absolute top-1/3 left-1/4 animate-pulse">
-                    <div className="w-3 h-3 bg-red-500 rounded-full shadow-lg shadow-red-500/50"></div>
-                  </div>
-                  <div className="absolute top-1/2 right-1/3 animate-pulse" style={{ animationDelay: '0.5s' }}>
-                    <div className="w-3 h-3 bg-cyan-500 rounded-full shadow-lg shadow-cyan-500/50"></div>
-                  </div>
-                  <div className="absolute bottom-1/3 left-1/2 animate-pulse" style={{ animationDelay: '1s' }}>
-                    <div className="w-3 h-3 bg-purple-500 rounded-full shadow-lg shadow-purple-500/50"></div>
-                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -309,39 +292,80 @@ export default function OperacionPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-6">
-                <div className="space-y-3">
-                  {todaysFlights.map((flight, index) => (
-                    <div 
-                      key={index}
-                      className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 p-4 bg-gray-900/50 rounded-lg hover:bg-gray-900 transition-colors cursor-pointer"
-                    >
-                      <div className="flex items-center gap-4 min-w-0 flex-shrink-0">
-                        <div className={`w-2 h-2 rounded-full flex-shrink-0 ${
-                          flight.status === 'En Vuelo' ? 'bg-green-400' :
-                          flight.status === 'Embarcando' ? 'bg-amber-400' :
-                          'bg-gray-400'
-                        }`}></div>
-                        <div className="min-w-0">
-                          <p className="text-white font-semibold truncate">{flight.flightNumber}</p>
-                          <p className="text-sm text-gray-400 truncate">{flight.pilot}</p>
+                {/* Departure Board Style Table */}
+                <div className="bg-black rounded-lg overflow-hidden border border-amber-900/30">
+                  {/* Header */}
+                  <div className="bg-gradient-to-r from-black via-amber-900/20 to-black border-b border-amber-900/30 px-4 py-3 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 bg-amber-500 rounded flex items-center justify-center">
+                        <Plane className="h-4 w-4 text-black" />
+                      </div>
+                      <span className="text-amber-400 font-bold text-sm tracking-wider">DEPARTURES</span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <div className="text-amber-400 font-mono text-lg font-bold">
+                          {new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
                         </div>
+                        <div className="text-amber-400/60 text-[10px] font-mono">LOCAL</div>
                       </div>
-                      <div className="text-center md:text-center min-w-0 flex-1">
-                        <p className="text-white font-mono truncate">{flight.origin} → {flight.destination}</p>
-                        <p className="text-xs text-gray-400 truncate">{flight.aircraft}</p>
-                      </div>
-                      <div className="text-left md:text-right flex-shrink-0">
-                        <p className="text-white whitespace-nowrap mb-1">{flight.departureTime}</p>
-                        <Badge variant="outline" className={`text-xs whitespace-nowrap ${
-                          flight.status === 'En Vuelo' ? 'bg-green-900/20 text-green-400 border-green-800' :
-                          flight.status === 'Embarcando' ? 'bg-amber-900/20 text-amber-400 border-amber-800' :
-                          'bg-gray-800 text-gray-400 border-gray-700'
-                        }`}>
-                          {flight.status}
-                        </Badge>
+                      <div className="text-right">
+                        <div className="text-amber-400 font-mono text-lg font-bold">
+                          {new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })}
+                        </div>
+                        <div className="text-amber-400/60 text-[10px] font-mono">ZULU</div>
                       </div>
                     </div>
-                  ))}
+                  </div>
+
+                  {/* Table Header */}
+                  <div className="grid grid-cols-12 gap-2 px-4 py-2 bg-black/80 border-b border-gray-800 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                    <div className="col-span-2">Time (Local)</div>
+                    <div className="col-span-3">Destination</div>
+                    <div className="col-span-2">Flight</div>
+                    <div className="col-span-2">Captain</div>
+                    <div className="col-span-3">Remarks</div>
+                  </div>
+
+                  {/* Table Body */}
+                  <div className="divide-y divide-gray-800/50">
+                    {todaysFlights.map((flight, index) => (
+                      <div
+                        key={index}
+                        className="grid grid-cols-12 gap-2 px-4 py-3 hover:bg-amber-900/10 transition-colors cursor-pointer group"
+                      >
+                        {/* Time */}
+                        <div className="col-span-2 font-mono text-amber-400 font-bold">
+                          {flight.departureTime}
+                        </div>
+
+                        {/* Destination */}
+                        <div className="col-span-3">
+                          <div className="text-amber-300 font-bold tracking-wide">{flight.destination}</div>
+                          <div className="text-xs text-gray-500">{flight.aircraft}</div>
+                        </div>
+
+                        {/* Flight Number */}
+                        <div className="col-span-2 font-mono text-amber-400 font-bold">
+                          {flight.flightNumber}
+                        </div>
+
+                        {/* Captain */}
+                        <div className="col-span-2 text-white font-semibold truncate">
+                          {flight.pilot}
+                        </div>
+
+                        {/* Remarks/Status */}
+                        <div className="col-span-3">
+                          <span className={`text-xs font-bold uppercase tracking-wider ${
+                            flight.status === 'Embarcando' ? 'text-amber-400' : 'text-green-400'
+                          }`}>
+                            {flight.status === 'Embarcando' ? 'Boarding' : 'On Time'}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </CardContent>
             </Card>

@@ -47,7 +47,7 @@ export function PilotCard({
         style={{ transformStyle: 'preserve-3d' }}
       >
         {/* Front Side */}
-        <Card className={`absolute inset-0 bg-gradient-to-br from-amber-900 via-amber-800 to-amber-950 text-white overflow-hidden ${isFlipped ? 'pointer-events-none' : ''}`} style={{ backfaceVisibility: 'hidden' }}>
+        <Card className={`absolute inset-0 bg-black text-white overflow-hidden border-amber-900/30 ${isFlipped ? 'pointer-events-none' : ''}`} style={{ backfaceVisibility: 'hidden' }}>
           <CardContent className="px-2.5 py-0 h-full flex items-center relative overflow-hidden">
             {/* Left Section - Info */}
             <div className="flex flex-col justify-center flex-1 pr-1.5 space-y-1.5 min-w-0">
@@ -106,7 +106,7 @@ export function PilotCard({
         </Card>
 
         {/* Back Side */}
-        <Card className={`absolute inset-0 bg-gradient-to-br from-amber-900 via-amber-800 to-amber-950 text-white overflow-hidden ${!isFlipped ? 'pointer-events-none' : ''}`} style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
+        <Card className={`absolute inset-0 bg-black text-white overflow-hidden border-amber-900/30 ${!isFlipped ? 'pointer-events-none' : ''}`} style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
           <CardContent className="px-2.5 py-0 h-full flex flex-col justify-center relative overflow-hidden">
             {/* Decorative airplane background */}
             <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Menu, Plane, X } from "lucide-react"
+import { Menu, Plane, X, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -19,21 +19,23 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
+import { useLanguage } from "@/contexts/language-context"
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/quienes-somos", label: "Quiénes Somos" },
-  { href: "/operacion", label: "Operación" },
-  { href: "/pilotos", label: "Pilotos" },
-  { href: "/flota", label: "Flota" },
-  { href: "/trading-cards", label: "Trading Cards" },
-  { href: "/noticias", label: "Noticias" },
-  { href: "/eventos", label: "Eventos" },
-  { href: "/contacto", label: "Contáctanos" },
+  { href: "/", labelKey: "nav.home" },
+  { href: "/quienes-somos", labelKey: "nav.about" },
+  { href: "/operacion", labelKey: "nav.operations" },
+  { href: "/pilotos", labelKey: "nav.pilots" },
+  { href: "/flota", labelKey: "nav.fleet" },
+  { href: "/trading-cards", labelKey: "nav.tradingCards" },
+  { href: "/noticias", labelKey: "nav.news" },
+  { href: "/eventos", labelKey: "nav.events" },
+  { href: "/contacto", labelKey: "nav.contact" },
 ]
 
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false)
+  const { language, setLanguage, t } = useLanguage()
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-amber-900/20 bg-black/80 backdrop-blur supports-[backdrop-filter]:bg-black/60">
@@ -51,7 +53,7 @@ export function Navbar() {
               <NavigationMenuItem key={item.href}>
                 <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "text-white/90 hover:text-white hover:bg-amber-900/80 data-[active]:bg-amber-900/80 data-[state=open]:bg-amber-900/80")}>
                   <Link href={item.href}>
-                    {item.label}
+                    {t(item.labelKey)}
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -61,11 +63,22 @@ export function Navbar() {
 
         {/* Desktop Auth Buttons */}
         <div className="hidden lg:flex items-center gap-2">
+          {/* Language Toggle */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
+            className="text-white hover:text-white hover:bg-amber-900/80 gap-1"
+            title={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+          >
+            <Globe className="h-4 w-4" />
+            <span className="text-xs font-bold">{language.toUpperCase()}</span>
+          </Button>
           <Button variant="ghost" asChild className="text-white hover:text-white hover:bg-amber-900/80">
-            <Link href="/login">Login</Link>
+            <Link href="/login">{t('nav.login')}</Link>
           </Button>
           <Button asChild className="bg-amber-600 hover:bg-amber-700 text-white">
-            <Link href="/registro">Registro</Link>
+            <Link href="/registro">{t('nav.register')}</Link>
           </Button>
         </div>
 
@@ -78,7 +91,7 @@ export function Navbar() {
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-gradient-to-br from-black via-amber-900/30 to-gray-950 border-amber-900/20">
-            <nav className="flex flex-col gap-4 mt-8">
+            <nav className="flex flex-col gap-4 mt-8 px-4">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -86,18 +99,27 @@ export function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className="text-lg font-medium text-white hover:text-amber-400 transition-colors"
                 >
-                  {item.label}
+                  {t(item.labelKey)}
                 </Link>
               ))}
               <div className="border-t border-amber-900/20 pt-4 mt-4 flex flex-col gap-2">
+                {/* Language Toggle Mobile */}
+                <Button
+                  variant="outline"
+                  onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
+                  className="w-full border-amber-900/30 text-white hover:bg-amber-900/20 hover:text-amber-400"
+                >
+                  <Globe className="h-4 w-4 mr-2" />
+                  {language === 'es' ? 'English' : 'Español'}
+                </Button>
                 <Button variant="outline" asChild className="w-full border-amber-900/30 text-white hover:bg-amber-900/20 hover:text-amber-400">
                   <Link href="/login" onClick={() => setIsOpen(false)}>
-                    Login
+                    {t('nav.login')}
                   </Link>
                 </Button>
                 <Button asChild className="w-full bg-amber-600 hover:bg-amber-700 text-white">
                   <Link href="/registro" onClick={() => setIsOpen(false)}>
-                    Registro
+                    {t('nav.register')}
                   </Link>
                 </Button>
               </div>

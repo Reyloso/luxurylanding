@@ -4,15 +4,17 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Search, TrendingUp, ArrowRight } from "lucide-react"
+import { Search, TrendingUp, ArrowRight, Plane } from "lucide-react"
 import { FlightTicket } from "@/components/flight-ticket"
 import { FlightDetailModal } from "@/components/flight-detail-modal"
 import { PilotCard } from "@/components/pilot-card"
 import { useState } from "react"
+import { useLanguage } from "@/contexts/language-context"
 
 export default function Home() {
   const [selectedFlight, setSelectedFlight] = useState<any>(null)
   const [modalOpen, setModalOpen] = useState(false)
+  const { t } = useLanguage()
 
   const currentFlights = [
     {
@@ -98,7 +100,7 @@ export default function Home() {
     {
       origin: "CTU",
       destination: "SBO",
-      departureTime: "12:28 PM",
+      departureTime: "12:28",
       arrivalTime: "23:58 PM",
       duration: "11h 30m",
       date: "26 Apr, 2024",
@@ -123,7 +125,7 @@ export default function Home() {
     {
       origin: "LHR",
       destination: "SYD",
-      departureTime: "10:15 AM",
+      departureTime: "10:15",
       arrivalTime: "23:00 PM",
       duration: "12h 45m",
       date: "26 Apr, 2024",
@@ -220,13 +222,12 @@ export default function Home() {
             {/* Left Content */}
             <div className="space-y-6">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white">
-                Experience<br />
-                The Magic Of<br />
-                <span className="text-amber-400">Flight!</span>
+                {t('home.heroTitle1')}<br />
+                {t('home.heroTitle2')}<br />
+                <span className="text-amber-400">{t('home.heroTitle3')}</span>
               </h1>
               <p className="text-lg text-white/80 max-w-md">
-                Descubre el mundo con LuxuryAir. Vuelos premium, servicio excepcional, 
-                destinos inolvidables.
+                {t('home.heroDescription')}
               </p>
       
             </div>
@@ -241,8 +242,8 @@ export default function Home() {
       <section className="bg-white py-16">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Nuestros Partners</h2>
-            <p className="text-gray-600 text-lg">Colaboramos con las mejores organizaciones de aviación virtual</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('home.partnersTitle')}</h2>
+            <p className="text-gray-600 text-lg">{t('home.partnersDescription')}</p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-12">
             <div className=" transition-all duration-300 hover:scale-110">
@@ -276,15 +277,15 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: "500+", label: "Pilotos Activos" },
-              { value: "15K+", label: "Vuelos Completados" },
-              { value: "50+", label: "Destinos" },
-              { value: "86+", label: "Rutas Disponibles" }
+              { value: "500+", labelKey: "home.activePilots" },
+              { value: "15K+", labelKey: "home.completedFlights" },
+              { value: "50+", labelKey: "home.destinations" },
+              { value: "86+", labelKey: "home.availableRoutes" }
             ].map((stat, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow bg-[#161616] text-white border-gray-800">
                 <CardContent className="pt-6 pb-6">
                   <div className="text-4xl font-bold text-amber-400 mb-2">{stat.value}</div>
-                  <div className="text-sm text-white/60">{stat.label}</div>
+                  <div className="text-sm text-white/60">{t(stat.labelKey)}</div>
                 </CardContent>
               </Card>
             ))}
@@ -296,8 +297,8 @@ export default function Home() {
       <section className="py-16 md:py-24">
         <div className="container">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Live Tracking</h2>
-            <p className="text-muted-foreground">Sigue nuestros vuelos en tiempo real</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('home.trackingTitle')}</h2>
+            <p className="text-muted-foreground">{t('home.trackingDescription')}</p>
           </div>
           <div className="w-full h-[600px] rounded-lg overflow-hidden border border-border shadow-lg">
             <iframe
@@ -318,8 +319,8 @@ export default function Home() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h2 className="text-xl md:text-2xl font-bold mb-1">Vuelos Actuales</h2>
-                  <p className="text-xs text-muted-foreground">En tiempo real</p>
+                  <h2 className="text-xl md:text-2xl font-bold mb-1">{t('home.liveFlights')}</h2>
+                  <p className="text-xs text-muted-foreground">{t('home.realTime')}</p>
                 </div>
                 <Badge variant="secondary" className="text-xs">{currentFlights.length}</Badge>
               </div>
@@ -344,33 +345,89 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Recent Flights Column */}
+            {/* Recent Flights Column - Departure Board */}
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h2 className="text-xl md:text-2xl font-bold mb-1">Vuelos Recientes</h2>
-                  <p className="text-xs text-muted-foreground">Completados</p>
+                  <h2 className="text-xl md:text-2xl font-bold mb-1">{t('home.upcomingFlights')}</h2>
+                  <p className="text-xs text-muted-foreground">{t('home.schedule')}</p>
                 </div>
                 <Badge variant="secondary" className="text-xs">{recentFlights.length}</Badge>
               </div>
 
-              <div className="flex flex-col gap-3">
-                {recentFlights.map((flight, index) => (
-                  <FlightTicket
-                    key={index}
-                    origin={flight.origin}
-                    destination={flight.destination}
-                    departureTime={flight.departureTime}
-                    arrivalTime={flight.arrivalTime}
-                    duration={flight.duration}
-                    date={flight.date}
-                    flightNumber={flight.flightNumber}
-                    pilot={flight.pilot}
-                    status={flight.status}
-                    iconColor={flight.iconColor}
-                    onClick={() => handleFlightClick(flight)}
-                  />
-                ))}
+              {/* Departure Board */}
+              <div className="bg-black rounded-lg overflow-hidden border border-amber-900/30">
+                {/* Header */}
+                <div className="bg-gradient-to-r from-black via-amber-900/20 to-black border-b border-amber-900/30 px-4 py-3 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 bg-amber-500 rounded flex items-center justify-center">
+                      <Plane className="h-4 w-4 text-black" />
+                    </div>
+                    <span className="text-amber-400 font-bold text-sm tracking-wider">{t('board.departures')}</span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="text-right">
+                      <div className="text-amber-400 font-mono text-lg font-bold">
+                        {new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
+                      </div>
+                      <div className="text-amber-400/60 text-[10px] font-mono">{t('board.local')}</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-amber-400 font-mono text-lg font-bold">
+                        {new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })}
+                      </div>
+                      <div className="text-amber-400/60 text-[10px] font-mono">{t('board.zulu')}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Table Header */}
+                <div className="grid grid-cols-12 gap-2 px-4 py-2 bg-black/80 border-b border-gray-800 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                  <div className="col-span-2">{t('board.time')}</div>
+                  <div className="col-span-3">{t('board.destination')}</div>
+                  <div className="col-span-2">{t('board.flight')}</div>
+                  <div className="col-span-2">{t('board.captain')}</div>
+                  <div className="col-span-3">{t('board.remarks')}</div>
+                </div>
+
+                {/* Table Body */}
+                <div className="divide-y divide-gray-800/50">
+                  {recentFlights.map((flight, index) => (
+                    <div
+                      key={index}
+                      className="grid grid-cols-12 gap-2 px-4 py-3 hover:bg-amber-900/10 transition-colors cursor-pointer group"
+                      onClick={() => handleFlightClick(flight)}
+                    >
+                      {/* Time */}
+                      <div className="col-span-2 font-mono text-amber-400 font-bold">
+                        {flight.departureTime}
+                      </div>
+
+                      {/* Destination */}
+                      <div className="col-span-3">
+                        <div className="text-amber-300 font-bold tracking-wide">{flight.destination}</div>
+                        <div className="text-xs text-gray-500">{flight.aircraft}</div>
+                      </div>
+
+                      {/* Flight Number */}
+                      <div className="col-span-2 font-mono text-amber-400 font-bold">
+                        {flight.flightNumber}
+                      </div>
+
+                      {/* Captain */}
+                      <div className="col-span-2 text-white font-semibold truncate">
+                        {flight.pilot}
+                      </div>
+
+                      {/* Remarks/Status */}
+                      <div className="col-span-3">
+                        <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                          {t(`status.${flight.status.toLowerCase().replace(' ', '')}`)}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -378,8 +435,8 @@ export default function Home() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h2 className="text-xl md:text-2xl font-bold mb-1">Pilotos Destacados</h2>
-                  <p className="text-xs text-muted-foreground">Vuelos recientes</p>
+                  <h2 className="text-xl md:text-2xl font-bold mb-1">{t('home.featuredPilots')}</h2>
+                  <p className="text-xs text-muted-foreground">{t('home.recentFlights')}</p>
                 </div>
                 <Badge variant="secondary" className="text-xs">{topPilots.length}</Badge>
               </div>
@@ -406,7 +463,7 @@ export default function Home() {
             <FlightDetailModal
               open={modalOpen}
               onOpenChange={setModalOpen}
-              flightData={selectedFlight}
+              flight={selectedFlight}
             />
           )}
         </div>
@@ -419,22 +476,21 @@ export default function Home() {
             <CardContent className="p-12 text-center space-y-6">
               <TrendingUp className="h-16 w-16 mx-auto text-amber-400" />
               <h2 className="text-3xl md:text-4xl font-bold text-white">
-                ¿Listo para despegar?
+                {t('cta.title')}
               </h2>
               <p className="text-lg text-white/80 max-w-2xl mx-auto">
-                Únete a la comunidad de pilotos virtuales más exclusiva. 
-                Regístrate hoy y comienza tu carrera en LuxuryAir.
+                {t('cta.description')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Button size="lg" variant="secondary" className="rounded-full bg-amber-600 hover:bg-amber-700 text-white" asChild>
                   <Link href="/registro">
-                    Registrarse Ahora
+                    {t('cta.registerNow')}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="rounded-full bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10" asChild>
                   <Link href="/flota">
-                    Ver Flota
+                    {t('cta.viewFleet')}
                   </Link>
                 </Button>
               </div>

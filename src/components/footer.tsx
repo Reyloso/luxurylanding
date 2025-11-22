@@ -1,7 +1,11 @@
+"use client"
+
 import Link from "next/link"
 import { Plane, Mail, MapPin, Phone } from "lucide-react"
+import { useLanguage } from "@/contexts/language-context"
 
 export function Footer() {
+  const { t } = useLanguage()
   return (
     <footer className="border-t bg-muted/50">
       <div className="container py-12">
@@ -13,32 +17,32 @@ export function Footer() {
               <span>LuxuryAir</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Aerolínea virtual premium en la red IVAO. Vuela con excelencia y profesionalismo.
+              {t('footer.description')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold mb-4">Enlaces Rápidos</h3>
+            <h3 className="font-semibold mb-4">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/quienes-somos" className="text-muted-foreground hover:text-primary transition-colors">
-                  Quiénes Somos
+                  {t('footer.aboutUs')}
                 </Link>
               </li>
               <li>
                 <Link href="/flota" className="text-muted-foreground hover:text-primary transition-colors">
-                  Nuestra Flota
+                  {t('footer.ourFleet')}
                 </Link>
               </li>
               <li>
                 <Link href="/operacion" className="text-muted-foreground hover:text-primary transition-colors">
-                  Operación
+                  {t('footer.operations')}
                 </Link>
               </li>
               <li>
                 <Link href="/eventos" className="text-muted-foreground hover:text-primary transition-colors">
-                  Eventos
+                  {t('footer.events')}
                 </Link>
               </li>
             </ul>
@@ -46,26 +50,26 @@ export function Footer() {
 
           {/* Pilots */}
           <div>
-            <h3 className="font-semibold mb-4">Pilotos</h3>
+            <h3 className="font-semibold mb-4">{t('footer.pilots')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/pilotos" className="text-muted-foreground hover:text-primary transition-colors">
-                  Centro de Pilotos
+                  {t('footer.pilotCenter')}
                 </Link>
               </li>
               <li>
                 <Link href="/registro" className="text-muted-foreground hover:text-primary transition-colors">
-                  Registro
+                  {t('footer.register')}
                 </Link>
               </li>
               <li>
                 <Link href="/login" className="text-muted-foreground hover:text-primary transition-colors">
-                  Login
+                  {t('footer.login')}
                 </Link>
               </li>
               <li>
                 <Link href="/noticias" className="text-muted-foreground hover:text-primary transition-colors">
-                  Noticias
+                  {t('footer.news')}
                 </Link>
               </li>
             </ul>
@@ -73,7 +77,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold mb-4">Contacto</h3>
+            <h3 className="font-semibold mb-4">{t('footer.contact')}</h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <Mail className="h-4 w-4 mt-0.5 text-muted-foreground" />
@@ -81,11 +85,11 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 mt-0.5 text-muted-foreground" />
-                <span className="text-muted-foreground">Red IVAO Internacional</span>
+                <span className="text-muted-foreground">{t('footer.ivaoNetwork')}</span>
               </li>
               <li>
                 <Link href="/contacto" className="text-primary hover:underline">
-                  Formulario de contacto →
+                  {t('footer.contactForm')} →
                 </Link>
               </li>
             </ul>
@@ -93,7 +97,7 @@ export function Footer() {
         </div>
 
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} LuxuryAir IVAO. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} LuxuryAir IVAO. {t('footer.rights')}</p>
         </div>
       </div>
     </footer>
